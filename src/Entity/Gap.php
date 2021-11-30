@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Entity;
+
+use App\Entity\Traits\Timestampable;
+use App\Repository\GapRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
+
+/**
+ * @ORM\Entity(repositoryClass=GapRepository::class)
+ * @ORM\HasLifecycleCallbacks
+ */
+class Gap
+{
+    use Timestampable;
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="uuid", unique=true)
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Service::class, inversedBy="gaps")
+     */
+    private $service;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="gaps")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=UnitComponent::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $unitComponent;
+
+    public function __construct()
+    {
+        $this->id = Uuid::v4();
+    }
+
+    public function getId(): ?Uuid
+    {
+        return $this->id;
+    }
+
+    public function getService(): ?Service
+    {
+        return $this->service;
+    }
+
+    public function setService(?Service $service): self
+    {
+        $this->service = $service;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getUnitComponent(): ?UnitComponent
+    {
+        return $this->unitComponent;
+    }
+
+    public function setUnitComponent(?UnitComponent $unitComponent): self
+    {
+        $this->unitComponent = $unitComponent;
+
+        return $this;
+    }
+}
