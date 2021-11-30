@@ -6,6 +6,11 @@ login_check:
   methods:  [POST]
   defaults:
     _format: json
+
 gesdinet_jwt_refresh_token:
   path: /api/auth/refresh
+  controller: gesdinet.jwtrefreshtoken:refresh
+  methods:  [POST]
+  defaults:
+    _format: json
 
