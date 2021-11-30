@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.10",
         "easycorp/easyadmin-bundle": "^3.5",
+        "gesdinet/jwt-refresh-token-bundle": "^1.0.0-beta4",
         "lexik/jwt-authentication-bundle": "^2.14",
         "nelmio/cors-bundle": "^2.1",
         "symfony/console": "5.3.*",
@@ -21,6 +22,7 @@
         "symfony/proxy-manager-bridge": "5.3.*",
         "symfony/runtime": "5.3.*",
         "symfony/uid": "5.3.*",
+        "symfony/validator": "5.3.*",
         "symfony/yaml": "5.3.*"
     },
     "config": {
@@ -67,6 +69,8 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.36"
+        "symfony/maker-bundle": "^1.36",
+        "symfony/stopwatch": "5.3.*",
+        "symfony/web-profiler-bundle": "5.3.*"
     }
 }

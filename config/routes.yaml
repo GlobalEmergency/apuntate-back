@@ -2,7 +2,10 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 login_check:
-  path:     /api/login_check
+  path:     /api/auth/login
   methods:  [POST]
   defaults:
     _format: json
+gesdinet_jwt_refresh_token:
+  path: /api/auth/refresh
+
