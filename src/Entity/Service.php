@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ServiceRepository;
 use App\Entity\Traits\Timestampable;
+use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
@@ -16,6 +18,7 @@ use Symfony\Component\Uid\Uuid;
 class Service
 {
     use Timestampable;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
@@ -33,17 +36,19 @@ class Service
     private $description;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="carbon")
      */
     private $date;
 
     /**
      * @ORM\ManyToMany(targetEntity=Unit::class, inversedBy="services")
+     * @MaxDepth(1)
      */
     private $units;
 
     /**
      * @ORM\OneToMany(targetEntity=Gap::class, mappedBy="service")
+     * @MaxDepth(1)
      */
     private $gaps;
 
@@ -83,14 +88,19 @@ class Service
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?Carbon
     {
+        if($this->date instanceof \DateTime) {
+            $this->date = Carbon::instance($this->date);
+        }
         return $this->date;
     }
 
     public function setDate(\DateTimeInterface $date): self
     {
-        $this->date = $date;
+        if(!$date instanceof Carbon) {
+            $this->date = Carbon::instance($date);
+        }
 
         return $this;
     }

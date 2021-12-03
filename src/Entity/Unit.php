@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass=UnitRepository::class)
@@ -31,11 +32,13 @@ class Unit
 
     /**
      * @ORM\ManyToOne(targetEntity=Speciality::class, inversedBy="units")
+     * @MaxDepth(1)
      */
     private ?Speciality $speciality;
 
     /**
      * @ORM\ManyToMany(targetEntity=Service::class, mappedBy="units")
+     * @MaxDepth(1)
      */
     private $services;
 
@@ -152,5 +155,13 @@ class Unit
         }
 
         return $this;
+    }
+
+    public function componentsMax(){
+        $max = 0;
+        foreach($this->getUnitComponents() as $unitComponent){
+            $max += $unitComponent->getQuantity();
+        }
+        return $max;
     }
 }
