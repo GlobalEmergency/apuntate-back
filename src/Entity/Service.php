@@ -47,7 +47,7 @@ class Service
     private $units;
 
     /**
-     * @ORM\OneToMany(targetEntity=Gap::class, mappedBy="service")
+     * @ORM\OneToMany(targetEntity=Gap::class, mappedBy="service",cascade={"persist"})
      * @MaxDepth(1)
      */
     private $gaps;

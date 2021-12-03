@@ -1,0 +1,59 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+
+{% block main %}
+    <h1>{{ service.name }}</h1>
+
+    <h3>Units associated</h3>
+    <form method="post" action="">
+    <table class="datagrid">
+        <thead>
+        <tr>
+            <td>Unit</td>
+            <td>Gaps / Total</td>
+            <td>Generate</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for unit in service.units %}
+            <tr>
+                <td><span class="badge badge-info">{{ unit.speciality|default("") }}</span> {{ unit.name }}</td>
+                <td>{{ unit.componentsMax }}</td>
+                <td>
+                    <input type="number" name="{{ unit.id }}" value="{{ unit.componentsMax }}" min="{{ unit.unitComponents|length }}" max="{{ unit.componentsMax }}" />
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3">
+                <button type="submit" class="btn btn-primary">Generate</button>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+    </form>
+
+    <h3>Gaps available</h3>
+    <table class="datagrid">
+        <thead>
+        <tr>
+            <td>Unit</td>
+            <td>Speciality</td>
+            <td>Details</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for gap in service.gaps %}
+            <tr>
+                <td>{{ gap.unit }}</td>
+                <td>{{ gap.position }}</td>
+                <td><a href="{{ path('manager_service_detail',{'serviceId':data.id}) }}">Details</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

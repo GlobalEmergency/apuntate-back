@@ -1,0 +1,24 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+
+{% block main %}
+    <table class="datagrid">
+        <thead>
+        <tr>
+            <td>Some Column</td>
+            <td>Another Column</td>
+            <td>Details</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in services %}
+            <tr>
+                <td>{{ data.id }}</td>
+                <td>{{ data.name }}</td>
+                <td><a href="{{ path('manager_service_detail',{'serviceId':data.id}) }}">Details</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

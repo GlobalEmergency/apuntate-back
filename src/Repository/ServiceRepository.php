@@ -73,4 +73,10 @@ class ServiceRepository extends ServiceEntityRepository
             ;
 
     }
+
+    public function save(Service $service)
+    {
+        $this->_em->persist($service);
+        $this->_em->flush($service);
+    }
 }
