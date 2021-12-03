@@ -19,4 +19,16 @@ final class ProfileController extends AbstractController
     public function getProfile(): Response{
         return new JsonResponse($this->getUser());
     }
+
+    /**
+     * @Route ("/alerts", methods={"GET"})
+     */
+    public function getAlerts(): Response{
+        return new JsonResponse([
+            ['id' => 1, 'title' => 'Alert 1', 'resume' => 'Description 1'],
+            ['id' => 2, 'title' => 'Alert 2', 'resume' => 'Description 2'],
+            ['id' => 3, 'title' => 'Alert 3', 'resume' => 'Description 3'],
+        ]);
+    }
+
 }

@@ -19,6 +19,19 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
+    public function findBetweenDates(\DateTime $dateStart, \DateTime $dateEnd){
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.date BETWEEN :start AND :end')
+            ->setParameter('start', $dateStart->format('Y-m-d H:i'))
+            ->setParameter('end', $dateEnd->format('Y-m-d H:i'))
+            ->orderBy('s.date', 'ASC')
+//            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+
     // /**
     //  * @return Service[] Returns an array of Service objects
     //  */
@@ -47,4 +60,17 @@ class ServiceRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findNexts(\DateTime $date = null)
+    {
+        if(is_null($date)){
+            $date = new \DateTime();
+        }
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.date > :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
 }
