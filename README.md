@@ -29,7 +29,10 @@ Apúntate está formada por:
 ## Instalación y puesta en marcha
 ### Producción
 - Descarga la última release tanto del back como del front.
-- Instala el repositorio back en tu servidor y genera las nuevas claves JWT para garantizar la seguridad.
+- Copia los ficheros del repositorio back en tu servidor o en tu máquina local
+-- Crea tu fichero de configuración .env.local basandote en .env y modifica los parametros que necesites. 
+-- Instala las librerias uilizando `composer install`
+-- Genera las nuevas claves JWT para garantizar la seguridad `php bin/console lexik:jwt:generate-keypair`
 - Modifica la url del backend en el fichero de configuración del front para que las peticiones puedan llegar correctamente en https://github.com/GlobalEmergency/apuntate-front/blob/master/src/environments/environment.ts
 - Genera los diferentes frontales que desees con Angular https://angular.io/cli/build
 
