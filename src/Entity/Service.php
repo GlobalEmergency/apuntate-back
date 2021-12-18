@@ -38,7 +38,18 @@ class Service
     /**
      * @ORM\Column(type="carbon")
      */
-    private $date;
+    private $dateStart;
+
+    /**
+     * @ORM\Column(type="carbon")
+     */
+    private $dateEnd;
+
+    /**
+     * @ORM\Column(type="carbon")
+     */
+    private $datePlace;
+
 
     /**
      * @ORM\ManyToMany(targetEntity=Unit::class, inversedBy="services")
@@ -88,18 +99,18 @@ class Service
         return $this;
     }
 
-    public function getDate(): ?Carbon
+    public function getDateStart(): ?Carbon
     {
-        if($this->date instanceof \DateTime) {
-            $this->date = Carbon::instance($this->date);
+        if($this->dateStart instanceof \DateTime) {
+            $this->dateStart = Carbon::instance($this->dateStart);
         }
-        return $this->date;
+        return $this->dateStart;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDateStart(\DateTimeInterface $dateStart): self
     {
-        if(!$date instanceof Carbon) {
-            $this->date = Carbon::instance($date);
+        if(!$dateStart instanceof Carbon) {
+            $this->dateStart = Carbon::instance($dateStart);
         }
 
         return $this;
@@ -158,6 +169,49 @@ class Service
 
         return $this;
     }
+
+    /**
+     * @return Carbon
+     */
+    public function getDateEnd(): ?Carbon
+    {
+        return $this->dateEnd;
+    }
+
+    /**
+     * @param Carbon $dateEnd
+     */
+    public function setDateEnd(\DateTime $dateEnd): self
+    {
+        if(!$dateEnd instanceof Carbon) {
+            $this->dateEnd = Carbon::instance($dateEnd);
+        }
+        $this->dateEnd = $dateEnd;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDatePlace()
+    {
+        return $this->datePlace;
+    }
+
+    /**
+     * @param mixed $datePlace
+     * @return Service
+     */
+    public function setDatePlace(\DateTime $datePlace)
+    {
+        if(!$datePlace instanceof Carbon) {
+            $this->datePlace = Carbon::instance($datePlace);
+        }
+
+        $this->datePlace = $datePlace;
+        return $this;
+    }
+
 
     public function __toString()
     {

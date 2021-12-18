@@ -19,10 +19,10 @@ final class CalendarTransform
     static function transformService(Service $service):array
     {
         return [
-            'id' => $service->getId(),
+            'id' => (string)$service->getId(),
             'title'=>$service->getName(),
-            'startTime' => $service->getDate()->format('D M d Y H:i:s O'),
-            'endTime' => $service->getDate()->addHours(rand(4,20))->format('D M d Y H:i:s O'),
+            'startTime' => $service->getDateStart()->format('D M d Y H:i:s O'),
+            'endTime' => $service->getDateEnd()->format('D M d Y H:i:s O'),
             'allDay' => false,
         ];
     }

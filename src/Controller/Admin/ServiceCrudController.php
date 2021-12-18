@@ -22,7 +22,10 @@ class ServiceCrudController extends AbstractCrudController
         return [
             TextField::new('name'),
             TextEditorField::new('description'),
-            DateTimeField::new('date'),
+            DateTimeField::new('datePlace'),
+            DateTimeField::new('dateStart'),
+            DateTimeField::new('dateEnd'),
+
             AssociationField::new('units')
         ];
     }

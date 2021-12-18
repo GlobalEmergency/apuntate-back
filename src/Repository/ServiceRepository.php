@@ -21,10 +21,10 @@ class ServiceRepository extends ServiceEntityRepository
 
     public function findBetweenDates(\DateTime $dateStart, \DateTime $dateEnd){
         return $this->createQueryBuilder('s')
-            ->andWhere('s.date BETWEEN :start AND :end')
+            ->andWhere('s.dateStart BETWEEN :start AND :end')
             ->setParameter('start', $dateStart->format('Y-m-d H:i'))
             ->setParameter('end', $dateEnd->format('Y-m-d H:i'))
-            ->orderBy('s.date', 'ASC')
+            ->orderBy('s.dateStart', 'ASC')
 //            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
