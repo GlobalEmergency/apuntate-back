@@ -9,6 +9,7 @@ doctrine:
         types:
             carbon_interval: App\Type\CarbonIntervalType
             carbon: Carbon\Doctrine\CarbonType
+            serviceStatus: App\Type\ServiceStatusType
         mapping_types:
             enum: string
 
