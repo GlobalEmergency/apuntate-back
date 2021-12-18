@@ -50,7 +50,6 @@ class Service
      */
     private $datePlace;
 
-
     /**
      * @ORM\ManyToMany(targetEntity=Unit::class, inversedBy="services")
      * @MaxDepth(1)
@@ -62,6 +61,11 @@ class Service
      * @MaxDepth(1)
      */
     private $gaps;
+
+    /**
+     * @ORM\Column(type="serviceStatus")
+     */
+    private $status;
 
     public function __construct()
     {
@@ -216,5 +220,17 @@ class Service
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }
