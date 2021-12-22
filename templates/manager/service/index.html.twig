@@ -5,17 +5,19 @@
     <table class="datagrid">
         <thead>
         <tr>
-            <td>Some Column</td>
-            <td>Another Column</td>
+            <td>Id</td>
+            <td>Title</td>
+            <td>Units / Gaps</td>
             <td>Details</td>
         </tr>
         </thead>
         <tbody>
-        {% for data in services %}
+        {% for service in services %}
             <tr>
-                <td>{{ data.id }}</td>
-                <td>{{ data.name }}</td>
-                <td><a href="{{ path('manager_service_detail',{'serviceId':data.id}) }}">Details</a></td>
+                <td><span class="badge badge-info">{{ service.status }}</span> {{ service.id }}</td>
+                <td>{{ service.name }}</td>
+                <td> {{ service.units|length }} / {{ service.gaps|length }}</td>
+                <td><a href="{{ path('manager_service_detail',{'serviceId':service.id}) }}">Details</a></td>
             </tr>
         {% endfor %}
         </tbody>

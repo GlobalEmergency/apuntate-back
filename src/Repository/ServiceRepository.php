@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Service;
+use Carbon\Carbon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -60,14 +61,22 @@ class ServiceRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findNexts(\DateTime $date = null)
+    public function findNexts(\DateTime $date = null, bool $prev=false)
     {
         if(is_null($date)){
-            $date = new \DateTime();
+            $date = Carbon::now();
+        }elseif($date instanceof \DateTime) {
+            $date = Carbon::instance($date);
         }
+
+        if($prev){
+            $date->subDays(15);
+        }
+
         return $this->createQueryBuilder('s')
-            ->andWhere('s.date > :date')
+            ->andWhere('s.dateStart > :date')
             ->setParameter('date', $date)
+            ->orderBy('s.dateStart', 'ASC')
             ->getQuery()
             ->getResult()
             ;

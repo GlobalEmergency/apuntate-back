@@ -6,34 +6,35 @@
 
     <h3>Units associated</h3>
     <form method="post" action="">
-    <table class="datagrid">
-        <thead>
-        <tr>
-            <td>Unit</td>
-            <td>Gaps / Total</td>
-            <td>Generate</td>
-        </tr>
-        </thead>
-        <tbody>
-
-        {% for unit in service.units %}
+        <table class="datagrid">
+            <thead>
             <tr>
-                <td><span class="badge badge-info">{{ unit.speciality|default("") }}</span> {{ unit.name }}</td>
-                <td>{{ unit.componentsMax }}</td>
-                <td>
-                    <input type="number" name="{{ unit.id }}" value="{{ unit.componentsMax }}" min="{{ unit.unitComponents|length }}" max="{{ unit.componentsMax }}" />
+                <td>Unit</td>
+                <td>Gaps / Total</td>
+                <td>Generate</td>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for unit in service.units %}
+                <tr>
+                    <td><span class="badge badge-info">{{ unit.speciality|default("") }}</span> {{ unit.name }}</td>
+                    <td>{{ unit.componentsMax }}</td>
+                    <td>
+                        <input type="number" name="{{ unit.id }}" value="{{ unit.componentsMax }}"
+                               min="{{ unit.unitComponents|length }}" max="{{ unit.componentsMax }}"/>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">
+                    <button type="submit" class="btn btn-primary">Generate</button>
                 </td>
             </tr>
-        {% endfor %}
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="3">
-                <button type="submit" class="btn btn-primary">Generate</button>
-            </td>
-        </tr>
-        </tfoot>
-    </table>
+            </tfoot>
+        </table>
     </form>
 
     <h3>Gaps available</h3>
@@ -42,15 +43,20 @@
         <tr>
             <td>Unit</td>
             <td>Speciality</td>
+            <td>User</td>
             <td>Details</td>
         </tr>
         </thead>
         <tbody>
         {% for gap in service.gaps %}
             <tr>
-                <td>{{ gap.unit }}</td>
-                <td>{{ gap.position }}</td>
-                <td><a href="{{ path('manager_service_detail',{'serviceId':data.id}) }}">Details</a></td>
+                <td>{{ gap.unitComponent.unit }}</td>
+                <td>{{ gap.unitComponent.component }}</td>
+                <td>{{ gap.user|default("Pte.") }}</td>
+                <td>
+                    <i class="fa fa-user-plus"></i>
+                    <span class="badge badge-danger"><i class="fa fa-trash"></i></span
+                </td>
             </tr>
         {% endfor %}
         </tbody>
