@@ -73,12 +73,11 @@ class UserCrudController extends AbstractCrudController
             if (isset($clearPassword) === true && $clearPassword === '') {
                 //$entityInstance->setPassword($this->password);
             } else {
-                $encodedPassword = $this->passwordEncoder->hashPassword($entityInstance,$clearPassword);
+                $encodedPassword = $this->passwordEncoder->hashPassword($entityInstance, $clearPassword);
                 $entityInstance->setPassword($encodedPassword);
             }
         }
 
         parent::updateEntity($entityManager, $entityInstance);
     }
-
 }

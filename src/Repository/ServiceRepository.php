@@ -20,7 +20,8 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
-    public function findBetweenDates(\DateTime $dateStart, \DateTime $dateEnd){
+    public function findBetweenDates(\DateTime $dateStart, \DateTime $dateEnd)
+    {
         return $this->createQueryBuilder('s')
             ->andWhere('s.dateStart BETWEEN :start AND :end')
             ->setParameter('start', $dateStart->format('Y-m-d H:i'))
@@ -30,7 +31,6 @@ class ServiceRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
             ;
-
     }
 
     // /**
@@ -63,13 +63,13 @@ class ServiceRepository extends ServiceEntityRepository
     */
     public function findNexts(\DateTime $date = null, bool $prev=false)
     {
-        if(is_null($date)){
+        if (is_null($date)) {
             $date = Carbon::now();
-        }elseif($date instanceof \DateTime) {
+        } elseif ($date instanceof \DateTime) {
             $date = Carbon::instance($date);
         }
 
-        if($prev){
+        if ($prev) {
             $date->subDays(15);
         }
 
@@ -80,7 +80,6 @@ class ServiceRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
             ;
-
     }
 
     public function save(Service $service)

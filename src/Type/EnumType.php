@@ -1,9 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace App\Type;
-
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
@@ -14,7 +13,9 @@ abstract class EnumType extends Type
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        $values = array_map(function($val) { return "'".$val."'"; }, $this->getValues());
+        $values = array_map(function ($val) {
+            return "'".$val."'";
+        }, $this->getValues());
 
         return "ENUM(".implode(", ", $values).")";
     }
@@ -41,5 +42,4 @@ abstract class EnumType extends Type
     {
         return true;
     }
-
 }

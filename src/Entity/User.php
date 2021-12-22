@@ -125,7 +125,7 @@ class User implements UserInterface
 
     public function setPassword(?string $password): self
     {
-        if(!is_null($password)) {
+        if (!is_null($password)) {
             $this->password = $password;
         }
         return $this;
@@ -249,5 +249,4 @@ class User implements UserInterface
         // TODO: Implement getUserIdentifier() method.
         return $this->getEmail();
     }
-
 }

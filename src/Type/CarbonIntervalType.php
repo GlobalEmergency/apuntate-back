@@ -1,9 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace App\Type;
-
 
 use Carbon\CarbonInterval;
 use Carbon\Doctrine\CarbonDoctrineType;
@@ -30,16 +29,16 @@ final class CarbonIntervalType extends DateIntervalType implements CarbonDoctrin
             $negative = $value[0] === '-';
             $value    = substr($value, 1);
         }
-        if($value === ""){
-            return new CarbonInterval(0,0,0,0,1);
+        if ($value === "") {
+            return new CarbonInterval(0, 0, 0, 0, 1);
         }
 
         try {
             $interval = new CarbonInterval($value);
         } catch (\Exception $exception) {
-            try{
-                $interval = CarbonInterval::createFromFormat("H:i:s",$value);
-            }catch (\Exception $ex){
+            try {
+                $interval = CarbonInterval::createFromFormat("H:i:s", $value);
+            } catch (\Exception $ex) {
                 throw ConversionException::conversionFailedFormat($value, $this->getName(), self::FORMAT, $exception);
             }
         }
@@ -48,5 +47,4 @@ final class CarbonIntervalType extends DateIntervalType implements CarbonDoctrin
         }
         return $interval;
     }
-
 }

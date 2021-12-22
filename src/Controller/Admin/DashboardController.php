@@ -48,11 +48,5 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::linkToCrud('Component', 'fas fa-list', Component::class);
         yield MenuItem::linkToCrud('Requirement', 'fas fa-list', Requirement::class);
-
-
-
-
-
-
     }
 }

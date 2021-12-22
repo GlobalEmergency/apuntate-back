@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\Normalizer;
@@ -23,5 +24,4 @@ class CarbonNormalizer implements NormalizerInterface
     {
         return $data instanceof Carbon;
     }
-
 }

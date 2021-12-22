@@ -73,7 +73,7 @@ class Unit
 
     public function getIdentifier(): string
     {
-        return (is_null($this->identifier))? $this->getName() : $this->identifier;
+        return (is_null($this->identifier)) ? $this->getName() : $this->identifier;
     }
 
     public function setIdentifier(string $identifier): self
@@ -157,9 +157,10 @@ class Unit
         return $this;
     }
 
-    public function componentsMax(){
+    public function componentsMax()
+    {
         $max = 0;
-        foreach($this->getUnitComponents() as $unitComponent){
+        foreach ($this->getUnitComponents() as $unitComponent) {
             $max += $unitComponent->getQuantity();
         }
         return $max;

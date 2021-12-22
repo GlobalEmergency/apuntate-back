@@ -104,7 +104,4 @@ class UserSpeciality
         $this->user = $user;
         return $this;
     }
-
-
-
 }
