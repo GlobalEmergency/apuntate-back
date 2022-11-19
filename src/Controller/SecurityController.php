@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace GlobalEmergency\Apuntate\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

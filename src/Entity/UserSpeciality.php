@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Repository\UserSpecialityRepository;
-use App\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\UserSpecialityRepository;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 

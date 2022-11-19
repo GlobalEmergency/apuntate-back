@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 
-namespace App\Controller\API;
+namespace GlobalEmergency\Apuntate\Controller\API;
 
 
-use App\Entity\Service;
-use App\Repository\ServiceRepository;
-use App\Services\CalendarTransform;
+use GlobalEmergency\Apuntate\Entity\Service;
+use GlobalEmergency\Apuntate\Repository\ServiceRepository;
+use GlobalEmergency\Apuntate\Services\CalendarTransform;
 use Carbon\Carbon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use \App\Services\JsonResponse;

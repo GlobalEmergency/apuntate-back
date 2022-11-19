@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 
-namespace App\Application\Services;
+namespace GlobalEmergency\Apuntate\Application\Services;
 
 
-use App\Entity\Gap;
-use App\Entity\Service;
-use App\Repository\ServiceRepository;
-use App\Repository\UnitComponentRepository;
-use App\Repository\UnitRepository;
+use GlobalEmergency\Apuntate\Entity\Gap;
+use GlobalEmergency\Apuntate\Entity\Service;
+use GlobalEmergency\Apuntate\Repository\ServiceRepository;
+use GlobalEmergency\Apuntate\Repository\UnitComponentRepository;
+use GlobalEmergency\Apuntate\Repository\UnitRepository;
 
 final class CreateGaps
 {

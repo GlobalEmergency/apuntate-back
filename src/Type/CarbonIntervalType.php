@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Type;
+namespace GlobalEmergency\Apuntate\Type;
 
 
 use Carbon\CarbonInterval;
@@ -14,11 +14,11 @@ use PHPUnit\Exception;
 
 final class CarbonIntervalType extends DateIntervalType implements CarbonDoctrineType
 {
-    public function getName()
+    public function getName(): string
     {
         return 'carbon_interval';
     }
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?CarbonInterval
     {
         if ($value === null || $value instanceof CarbonInterval) {
             return $value;

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Repository\ComponentRepository;
+use GlobalEmergency\Apuntate\Repository\ComponentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
-use App\Entity\Requirement;
+use GlobalEmergency\Apuntate\Entity\Requirement;
 
 /**
  * @ORM\Entity(repositoryClass=ComponentRepository::class)

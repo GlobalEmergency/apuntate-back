@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Type;
+namespace GlobalEmergency\Apuntate\Type;
 
 class ServiceStatusType extends EnumType
 {

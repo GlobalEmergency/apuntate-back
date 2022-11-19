@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use App\Entity\Component;
-use App\Entity\Entity;
-use App\Entity\Gap;
-use App\Entity\Requirement;
-use App\Entity\Service;
-use App\Entity\Speciality;
-use App\Entity\Unit;
-use App\Entity\UnitComponent;
-use App\Entity\User;
-use App\Entity\UserSpeciality;
+use GlobalEmergency\Apuntate\Entity\Component;
+use GlobalEmergency\Apuntate\Entity\Entity;
+use GlobalEmergency\Apuntate\Entity\Gap;
+use GlobalEmergency\Apuntate\Entity\Requirement;
+use GlobalEmergency\Apuntate\Entity\Service;
+use GlobalEmergency\Apuntate\Entity\Speciality;
+use GlobalEmergency\Apuntate\Entity\Unit;
+use GlobalEmergency\Apuntate\Entity\UnitComponent;
+use GlobalEmergency\Apuntate\Entity\User;
+use GlobalEmergency\Apuntate\Entity\UserSpeciality;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;

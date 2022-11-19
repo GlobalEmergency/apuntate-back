@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 
-namespace App\Services;
+namespace GlobalEmergency\Apuntate\Services;
 
 
-use App\Services\Normalizer\CarbonNormalizer;
+use GlobalEmergency\Apuntate\Services\Normalizer\CarbonNormalizer;
 use Carbon\Carbon;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;

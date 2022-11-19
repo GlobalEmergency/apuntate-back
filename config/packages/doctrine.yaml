@@ -7,9 +7,9 @@ doctrine:
 
         url: '%env(resolve:DATABASE_URL)%'
         types:
-            carbon_interval: App\Type\CarbonIntervalType
+            carbon_interval: GlobalEmergency\Apuntate\Type\CarbonIntervalType
             carbon: Carbon\Doctrine\CarbonType
-            serviceStatus: App\Type\ServiceStatusType
+            serviceStatus: GlobalEmergency\Apuntate\Type\ServiceStatusType
         mapping_types:
             enum: string
 
@@ -22,5 +22,5 @@ doctrine:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
+                prefix: 'GlobalEmergency\Apuntate\Entity'
                 alias: App

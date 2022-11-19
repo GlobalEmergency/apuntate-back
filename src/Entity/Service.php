@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Repository\ServiceRepository;
-use App\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\ServiceRepository;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

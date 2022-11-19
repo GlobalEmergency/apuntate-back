@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Services\Normalizer;
+namespace GlobalEmergency\Apuntate\Services\Normalizer;
 
 use Carbon\Carbon;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;

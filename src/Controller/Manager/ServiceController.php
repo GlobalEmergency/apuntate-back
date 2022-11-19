@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 
-namespace App\Controller\Manager;
+namespace GlobalEmergency\Apuntate\Controller\Manager;
 
 
-use App\Application\Services\CreateGaps;
-use App\Entity\Service;
-use App\Repository\GapRepository;
-use App\Repository\ServiceRepository;
+use GlobalEmergency\Apuntate\Application\Services\CreateGaps;
+use GlobalEmergency\Apuntate\Entity\Service;
+use GlobalEmergency\Apuntate\Repository\GapRepository;
+use GlobalEmergency\Apuntate\Repository\ServiceRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
