@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use App\Entity\UserSpeciality;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use GlobalEmergency\Apuntate\Entity\UserSpeciality;
 
 class UserSpecialityCrudController extends AbstractCrudController
 {

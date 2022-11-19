@@ -1,21 +1,49 @@
-version: '3'
+version: '3.8'
 
 services:
-###> doctrine/doctrine-bundle ###
   database:
-    image: postgres:${POSTGRES_VERSION:-13}-alpine
+    container_name: ${SERVICE}-database
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ChangeMe}
-      POSTGRES_USER: ${POSTGRES_USER:-symfony}
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: symfony
+    ports:
+      - '33${SERVICE_PORT}:3306'
     volumes:
-      - db-data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
+      - my-db:/var/lib/mysql
+  php-fpm:
+    container_name: ${SERVICE}-php-fpm
+    build:
+      context: .
+      dockerfile: etc/docker/php-fpm/Dockerfile
+    ports:
+      - '90${SERVICE_PORT}:9000'
+    volumes:
+      - ~/.aws:/var/www/.aws
+      - ~/.composer:/var/www/.composer
+      - ~/.ssh:/var/www/.ssh
+      - .:/var/www/html/:delegated
+    depends_on:
+      - database
+  nginx:
+    container_name: ${SERVICE}-nginx
+    image: nginx:stable-alpine
+    ports:
+      - '80${SERVICE_PORT}:80'
+    volumes:
+      - ~/.aws:/var/www/.aws
+      - ~/.composer:/var/www/.composer
+      - ~/.ssh:/var/www/.ssh
+      - .:/var/www/html/:delegated
+      - ./etc/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php-fpm
+      - database
 
+# Names our volume
 volumes:
-###> doctrine/doctrine-bundle ###
-  db-data:
-###< doctrine/doctrine-bundle ###
+  my-db:
+#  ./mysql

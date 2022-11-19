@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use App\Entity\Speciality;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use GlobalEmergency\Apuntate\Entity\Speciality;
 
 class SpecialityCrudController extends AbstractCrudController
 {

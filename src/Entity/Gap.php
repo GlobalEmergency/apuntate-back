@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Entity\Traits\Timestampable;
-use App\Repository\GapRepository;
 use Doctrine\ORM\Mapping as ORM;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\GapRepository;
 use Symfony\Component\Uid\Uuid;
 
 /**

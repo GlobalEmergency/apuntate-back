@@ -1,6 +1,6 @@
 #index:
 #    path: /
-#    controller: App\Controller\DefaultController::index
+#    controller: GlobalEmergency\Apuntate\Controller\DefaultController::index
 login_check:
   path:     /api/auth/login
   methods:  [POST]

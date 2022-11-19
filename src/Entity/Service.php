@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Repository\ServiceRepository;
-use App\Entity\Traits\Timestampable;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Uuid;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\ServiceRepository;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
@@ -105,15 +105,16 @@ class Service
 
     public function getDateStart(): ?Carbon
     {
-        if($this->dateStart instanceof \DateTime) {
+        if ($this->dateStart instanceof \DateTime) {
             $this->dateStart = Carbon::instance($this->dateStart);
         }
+
         return $this->dateStart;
     }
 
     public function setDateStart(\DateTimeInterface $dateStart): self
     {
-        if(!$dateStart instanceof Carbon) {
+        if (!$dateStart instanceof Carbon) {
             $this->dateStart = Carbon::instance($dateStart);
         }
 
@@ -187,10 +188,11 @@ class Service
      */
     public function setDateEnd(\DateTime $dateEnd): self
     {
-        if(!$dateEnd instanceof Carbon) {
+        if (!$dateEnd instanceof Carbon) {
             $this->dateEnd = Carbon::instance($dateEnd);
         }
         $this->dateEnd = $dateEnd;
+
         return $this;
     }
 
@@ -204,18 +206,19 @@ class Service
 
     /**
      * @param mixed $datePlace
+     *
      * @return Service
      */
     public function setDatePlace(\DateTime $datePlace)
     {
-        if(!$datePlace instanceof Carbon) {
+        if (!$datePlace instanceof Carbon) {
             $this->datePlace = Carbon::instance($datePlace);
         }
 
         $this->datePlace = $datePlace;
+
         return $this;
     }
-
 
     public function __toString()
     {

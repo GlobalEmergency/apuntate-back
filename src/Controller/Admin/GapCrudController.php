@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use App\Entity\Gap;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use GlobalEmergency\Apuntate\Entity\Gap;
 
 class GapCrudController extends AbstractCrudController
 {

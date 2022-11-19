@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use App\Entity\Service;
-use App\Type\ServiceStatusType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use GlobalEmergency\Apuntate\Entity\Service;
+use GlobalEmergency\Apuntate\Type\ServiceStatusType;
 
 class ServiceCrudController extends AbstractCrudController
 {
@@ -33,7 +32,7 @@ class ServiceCrudController extends AbstractCrudController
 
             $status,
 
-            AssociationField::new('units')
+            AssociationField::new('units'),
         ];
     }
 }

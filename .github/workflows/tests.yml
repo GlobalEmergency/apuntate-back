@@ -1,0 +1,58 @@
+name: Test pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [synchronize, opened, reopened, ready_for_review]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Makefile executable
+        run: chmod +x Makefile
+
+      - name: Docker build
+        id: docker-build
+        run: docker-compose build
+
+      - name: Docker up
+        id: docker-up
+        run: make up
+
+      - name: Composer install
+        id: composer-install
+        run: make composer
+
+      - name: Check coding standards
+        id: phpcs-validate
+        run: make phpcs-validate
+
+#      - name: Check OpenApi
+#        id: openapi-validate
+#        run: make openapi-validate
+
+
+      #      - name: PHPStan validation
+      #        id: phpstan-validate
+      #        run: make phpstan
+
+      - name: Execute migrations for tests
+        id: db-migrations
+        run: make db-update env=test
+
+      - name: PHPUnit tests
+        id: phpunit-tests
+        run: make tests

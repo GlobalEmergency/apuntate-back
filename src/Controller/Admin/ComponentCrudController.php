@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use App\Entity\Component;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use GlobalEmergency\Apuntate\Entity\Component;
 
 class ComponentCrudController extends AbstractCrudController
 {
@@ -13,7 +13,6 @@ class ComponentCrudController extends AbstractCrudController
     {
         return Component::class;
     }
-
 
     public function configureFields(string $pageName): iterable
     {

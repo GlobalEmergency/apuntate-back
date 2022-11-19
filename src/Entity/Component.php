@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Repository\ComponentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use GlobalEmergency\Apuntate\Repository\ComponentRepository;
 use Symfony\Component\Uid\Uuid;
-use App\Entity\Requirement;
 
 /**
  * @ORM\Entity(repositoryClass=ComponentRepository::class)
@@ -34,6 +33,7 @@ class Component
      * @ORM\OneToMany(targetEntity=UnitComponent::class, mappedBy="component")
      */
     private $unitComponents;
+
     public function __construct()
     {
         $this->id = Uuid::v4();

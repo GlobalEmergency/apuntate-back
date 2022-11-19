@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Repository\UnitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Uuid;
+use GlobalEmergency\Apuntate\Repository\UnitRepository;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=UnitRepository::class)
@@ -73,7 +73,7 @@ class Unit
 
     public function getIdentifier(): string
     {
-        return (is_null($this->identifier))? $this->getName() : $this->identifier;
+        return (is_null($this->identifier)) ? $this->getName() : $this->identifier;
     }
 
     public function setIdentifier(string $identifier): self
@@ -157,11 +157,13 @@ class Unit
         return $this;
     }
 
-    public function componentsMax(){
+    public function componentsMax()
+    {
         $max = 0;
-        foreach($this->getUnitComponents() as $unitComponent){
+        foreach ($this->getUnitComponents() as $unitComponent) {
             $max += $unitComponent->getQuantity();
         }
+
         return $max;
     }
 }
