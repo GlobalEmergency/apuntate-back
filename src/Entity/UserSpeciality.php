@@ -2,9 +2,9 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
-use GlobalEmergency\Apuntate\Repository\UserSpecialityRepository;
-use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\UserSpecialityRepository;
 use Symfony\Component\Uid\Uuid;
 
 /**
@@ -88,23 +88,15 @@ class UserSpeciality
         return $this;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param User $user
-     */
     public function setUser(User $user): self
     {
         $this->user = $user;
+
         return $this;
     }
-
-
-
 }

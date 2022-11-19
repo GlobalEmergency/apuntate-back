@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace GlobalEmergency\Apuntate\Services\Normalizer;
@@ -9,19 +10,18 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 class CarbonNormalizer implements NormalizerInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         return $object->toW3cString();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function supportsNormalization($data, $format = null)
     {
         return $data instanceof Carbon;
     }
-
 }

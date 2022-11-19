@@ -2,9 +2,9 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use GlobalEmergency\Apuntate\Repository\GapRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
 /**

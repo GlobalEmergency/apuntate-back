@@ -2,14 +2,12 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
-use GlobalEmergency\Apuntate\Repository\SpecialityRepository;
-use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\SpecialityRepository;
 use Symfony\Component\Uid\Uuid;
-use Symfony\Component\Uid\UuidV4;
 
 /**
  * @ORM\Entity(repositoryClass=SpecialityRepository::class)

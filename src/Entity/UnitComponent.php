@@ -2,9 +2,8 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
-use GlobalEmergency\Apuntate\Repository\UnitComponentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use GlobalEmergency\Apuntate\Repository\UnitComponentRepository;
 use Symfony\Component\Uid\Uuid;
 
 /**

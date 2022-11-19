@@ -2,10 +2,10 @@
 
 namespace GlobalEmergency\Apuntate\Repository;
 
-use GlobalEmergency\Apuntate\Entity\Service;
 use Carbon\Carbon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use GlobalEmergency\Apuntate\Entity\Service;
 
 /**
  * @method Service|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,7 +20,8 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
-    public function findBetweenDates(\DateTime $dateStart, \DateTime $dateEnd){
+    public function findBetweenDates(\DateTime $dateStart, \DateTime $dateEnd)
+    {
         return $this->createQueryBuilder('s')
             ->andWhere('s.dateStart BETWEEN :start AND :end')
             ->setParameter('start', $dateStart->format('Y-m-d H:i'))
@@ -29,8 +30,7 @@ class ServiceRepository extends ServiceEntityRepository
 //            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-            ;
-
+        ;
     }
 
     // /**
@@ -61,15 +61,15 @@ class ServiceRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findNexts(\DateTime $date = null, bool $prev=false)
+    public function findNexts(\DateTime $date = null, bool $prev = false)
     {
-        if(is_null($date)){
+        if (is_null($date)) {
             $date = Carbon::now();
-        }elseif($date instanceof \DateTime) {
+        } elseif ($date instanceof \DateTime) {
             $date = Carbon::instance($date);
         }
 
-        if($prev){
+        if ($prev) {
             $date->subDays(15);
         }
 
@@ -79,8 +79,7 @@ class ServiceRepository extends ServiceEntityRepository
             ->orderBy('s.dateStart', 'ASC')
             ->getQuery()
             ->getResult()
-            ;
-
+        ;
     }
 
     public function save(Service $service)

@@ -2,15 +2,14 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
-use GlobalEmergency\Apuntate\Repository\UserRepository;
-use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
-
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -128,9 +127,10 @@ class User implements UserInterface
 
     public function setPassword(?string $password): self
     {
-        if(!is_null($password)) {
+        if (!is_null($password)) {
             $this->password = $password;
         }
+
         return $this;
     }
 
@@ -252,5 +252,4 @@ class User implements UserInterface
         // TODO: Implement getUserIdentifier() method.
         return $this->getEmail();
     }
-
 }

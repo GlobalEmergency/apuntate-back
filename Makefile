@@ -47,10 +47,10 @@ migrate-test: ## Run migrations test environment
 
 .PHONY: phpcs-fixer
 phpcs-fixer: ## Execute coding standards fixer
-	@docker exec -u www-data --tty ${SERVICE}-php-fpm php -dxdebug.mode=off bin/php-cs-fixer fix src
-	@docker exec -u www-data --tty ${SERVICE}-php-fpm php -dxdebug.mode=off bin/php-cs-fixer fix tests
+	@docker exec -u "$(id -u):$(id -g)" --tty ${SERVICE}-php-fpm php -dxdebug.mode=off bin/php-cs-fixer fix src
+	@docker exec -u "$(id -u):$(id -g)" --tty ${SERVICE}-php-fpm php -dxdebug.mode=off bin/php-cs-fixer fix tests
 
 .PHONY: phpcs-validate
 phpcs-validate: ## Execute coding standards validation
-	@docker exec -u www-data --tty ${SERVICE}-php-fpm php -dxdebug.mode=off bin/php-cs-fixer fix src --dry-run --diff --stop-on-violation
-	@docker exec -u www-data --tty ${SERVICE}-php-fpm php -dxdebug.mode=off bin/php-cs-fixer fix tests --dry-run --diff --stop-on-violation
+	@docker exec -u "$(id -u):$(id -g)" --tty ${SERVICE}-php-fpm php -dxdebug.mode=off bin/php-cs-fixer fix src --dry-run --diff --stop-on-violation
+	@docker exec -u "$(id -u):$(id -g)" --tty ${SERVICE}-php-fpm php -dxdebug.mode=off bin/php-cs-fixer fix tests --dry-run --diff --stop-on-violation
