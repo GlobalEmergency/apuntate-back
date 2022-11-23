@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GlobalEmergency\Apuntate\Services;
+namespace GlobalEmergency\Apuntate\Api\Infrastructure\Rest;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use GlobalEmergency\Apuntate\Services\Normalizer\CarbonNormalizer;

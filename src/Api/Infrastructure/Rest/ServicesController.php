@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GlobalEmergency\Apuntate\Controller\API;
+namespace GlobalEmergency\Apuntate\Api\Infrastructure\Rest;
 
-use App\Services\JsonResponse;
+use GlobalEmergency\Apuntate\Api\Infrastructure\Rest\JsonResponse;
 use Carbon\Carbon;
 use GlobalEmergency\Apuntate\Entity\Service;
 use GlobalEmergency\Apuntate\Repository\ServiceRepository;

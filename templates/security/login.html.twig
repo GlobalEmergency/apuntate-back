@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}GlobalEmergency Apuntate | Log in!{% endblock %}
 
 {% block body %}
+    <div>
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     {% if app.user %}
-        <div class="mb-3">
+        <div class="alert alert-success">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
 
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputOrganization">Organization</label>
+    <select name="organization" id="inputOrganization" class="form-control">
+        <option value="GlobalEmergency">GlobalEmergency</option>
+        <option value="Test1">Test 1</option>
+    </select>
+
+
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <label for="inputPassword">Password</label>
@@ -39,4 +47,5 @@
         Sign in
     </button>
 </form>
+    </div>
 {% endblock %}

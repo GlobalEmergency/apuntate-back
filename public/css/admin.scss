@@ -1,0 +1,18 @@
+body{
+  background-image: url("https://inafe.es/wp-content/uploads/38294.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+form{
+  margin: 0 auto;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-top: 10%;
+  padding: 20px;
+  border-radius: 10px;
+  .btn-lg{
+    margin-top: 10px;
+    width: 100%;
+  }
+}

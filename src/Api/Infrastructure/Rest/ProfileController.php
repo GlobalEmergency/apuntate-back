@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GlobalEmergency\Apuntate\Controller\API;
+namespace GlobalEmergency\Apuntate\Api\Infrastructure\Rest;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
