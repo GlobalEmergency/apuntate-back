@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Type;
+namespace GlobalEmergency\Apuntate\Type;
 
 use Carbon\CarbonInterval;
 use Carbon\Doctrine\CarbonDoctrineType;

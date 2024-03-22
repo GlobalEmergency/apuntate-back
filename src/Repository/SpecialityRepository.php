@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace GlobalEmergency\Apuntate\Repository;
 
-use App\Entity\Speciality;
+use GlobalEmergency\Apuntate\Entity\Speciality;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

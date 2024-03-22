@@ -9,22 +9,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/api/profile")
- */
+#[Route('/api/profile')]
 final class ProfileController extends AbstractController
 {
-    /**
-     * @Route ("/", methods={"GET"})
-     */
+    #[Route('/', methods: ['GET'])]
     public function getProfile(): Response
     {
         return new JsonResponse($this->getUser());
     }
 
-    /**
-     * @Route ("/alerts", methods={"GET"})
-     */
+    #[Route('/alerts', methods: ['GET'])]
     public function getAlerts(): Response
     {
         return new JsonResponse([

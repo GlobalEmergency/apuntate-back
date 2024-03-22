@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use App\Entity\Service;
-use App\Type\ServiceStatusType;
+use GlobalEmergency\Apuntate\Entity\Service;
+use GlobalEmergency\Apuntate\Entity\ServiceStatus;
+use GlobalEmergency\Apuntate\Type\ServiceStatusType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -22,7 +23,7 @@ class ServiceCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $status = ChoiceField::new('status');
-        $status->setChoices(ServiceStatusType::getValues());
+        $status->setChoices(ServiceStatus::cases());
 
         return [
             TextField::new('name'),

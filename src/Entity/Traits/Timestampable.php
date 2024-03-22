@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\Traits;
+namespace GlobalEmergency\Apuntate\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 

@@ -1,39 +1,30 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Entity\Traits\Timestampable;
-use App\Repository\GapRepository;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\GapRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
-/**
- * @ORM\Entity(repositoryClass=GapRepository::class)
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Entity(repositoryClass: GapRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Gap
 {
     use Timestampable;
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     */
+
+    #[ORM\Id]
+    #[ORM\Column(type: "uuid", unique: true)]
     private \Symfony\Component\Uid\UuidV4 $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Service::class, inversedBy="gaps")
-     */
+    #[ORM\ManyToOne(targetEntity: Service::class, inversedBy: "gaps")]
     private ?Service $service;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="gaps")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "gaps")]
     private ?User $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=UnitComponent::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: UnitComponent::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private $unitComponent;
 
     public function __construct()

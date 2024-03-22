@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Mothers;
+namespace GlobalEmergency\Apuntate\Tests\Mothers;
 
-use App\Entity\Service;
+use GlobalEmergency\Apuntate\Entity\Service;
 use Carbon\Carbon;
 
 final class ServiceMother

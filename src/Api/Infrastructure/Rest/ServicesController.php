@@ -14,14 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
-/**
- * @Route("/api/services", name="api_services_")
- */
+#[Route('/api/services', name: 'api_services_')]
 final class ServicesController extends AbstractController
 {
-    /**
-     * @Route("/calendar", name="calendar", methods={"GET"})
-     */
+    #[Route('/calendar', name: 'calendar', methods: ['GET'])]
     public function getCalendar(Request $request, ServiceRepository $serviceRepository)
     {
         $dateStart = Carbon::createFromFormat('d-m-Y', $request->get('s'))->startOfDay();
@@ -31,9 +27,7 @@ final class ServicesController extends AbstractController
         return new JsonResponse(CalendarTransform::transformServices($services));
     }
 
-    /**
-     * @Route ("/{service}", name="get", methods={"GET"})
-     */
+    #[Route('/{service}', name: 'get', methods: ['GET'])]
     public function getService(Request $request, ServiceRepository $serviceRepository, string $service, SerializerInterface $serializer)
     {
         $service = $serviceRepository->find($service);

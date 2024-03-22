@@ -1,14 +1,13 @@
 security:
-    enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-        App\Entity\User: 'auto'
+        GlobalEmergency\Apuntate\Entity\User: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         dbusers:
             entity:
-                class: App\Entity\User
+                class: GlobalEmergency\Apuntate\Entity\User
                 property: email
     firewalls:
         dev:
@@ -18,7 +17,7 @@ security:
         api_token_refresh:
             pattern: ^/api/auth/refresh
             stateless: true
-            refresh_jwt: ~
+#            refresh_jwt: ~
 
         login:
             pattern: ^/api/auth
@@ -37,7 +36,7 @@ security:
         main:
             lazy: true
             provider: dbusers
-            custom_authenticator: App\Security\FormAuthenticator
+            custom_authenticator: GlobalEmergency\Apuntate\Security\FormAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout

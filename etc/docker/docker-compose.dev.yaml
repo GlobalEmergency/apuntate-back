@@ -9,7 +9,7 @@ services:
       - ~/.ssh:/var/www/.ssh
       - ../../:/var/www/html/:delegated
     ports:
-      - "80:80"
+      - "8081:80"
     environment:
       PHP_IDE_CONFIG: "serverName=apuntate,apuntate_test"
   pgsql:

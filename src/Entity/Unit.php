@@ -1,50 +1,37 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Repository\UnitRepository;
+use GlobalEmergency\Apuntate\Repository\UnitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
-/**
- * @ORM\Entity(repositoryClass=UnitRepository::class)
- */
+#[ORM\Entity(repositoryClass: UnitRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Unit
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: "uuid", unique: true)]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $identifier;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Speciality::class, inversedBy="units")
-     * @MaxDepth(1)
-     */
+    #[ORM\ManyToOne(targetEntity: Speciality::class, inversedBy: "units")]
+    #[MaxDepth(1)]
     private ?Speciality $speciality;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Service::class, mappedBy="units")
-     * @MaxDepth(1)
-     */
+    #[ORM\ManyToMany(targetEntity: Service::class, mappedBy: "units")]
+    #[MaxDepth(1)]
     private $services;
 
-    /**
-     * @ORM\OneToMany(targetEntity=UnitComponent::class, mappedBy="unit")
-     */
+    #[ORM\OneToMany(targetEntity: UnitComponent::class, mappedBy: "unit")]
     private $unitComponents;
 
     public function __construct()

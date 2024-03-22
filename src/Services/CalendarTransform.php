@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace GlobalEmergency\Apuntate\Services;
 
-use App\Entity\Service;
+use GlobalEmergency\Apuntate\Entity\Service;
 
 final class CalendarTransform
 {

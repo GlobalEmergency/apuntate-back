@@ -1,45 +1,34 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Repository\UserSpecialityRepository;
-use App\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\UserSpecialityRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
-/**
- * @ORM\Entity(repositoryClass=UserSpecialityRepository::class)
- * @ORM\HasLifecycleCallbacks
- */
+#[ORM\Entity(repositoryClass: UserSpecialityRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class UserSpeciality
 {
     use Timestampable;
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     */
+
+    #[ORM\Id]
+    #[ORM\Column(type: "uuid", unique: true)]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Speciality::class, inversedBy="userSpecialities")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Speciality::class, inversedBy: "userSpecialities")]
+    #[ORM\JoinColumn(nullable: false)]
     private $speciality;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userSpecialities")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "userSpecialities")]
+    #[ORM\JoinColumn(nullable: false)]
     private User $user;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: "date")]
     private $dateStart;
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
+    #[ORM\Column(type: "date", nullable: true)]
     private $dateEnd;
 
     public function __construct()
@@ -88,17 +77,11 @@ class UserSpeciality
         return $this;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param User $user
-     */
     public function setUser(User $user): self
     {
         $this->user = $user;

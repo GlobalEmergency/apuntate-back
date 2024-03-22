@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use App\Entity\User;
+use GlobalEmergency\Apuntate\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -13,26 +13,22 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Security;
 
 class UserCrudController extends AbstractCrudController
 {
-    private Security $security;
     private UserPasswordHasherInterface $passwordEncoder;
     private ?string $password;
 
     public function __construct(
-        UserPasswordHasherInterface $passwordEncoder,
-        Security $security
+        UserPasswordHasherInterface $passwordEncoder
     ) {
         $this->passwordEncoder = $passwordEncoder;
-        $this->security = $security;
-
-        // get the user id from the logged in user
-        if (null !== $this->security->getUser()) {
-            $this->password = $this->security->getUser()->getPassword();
-        }
+//        $this->security = $security;
+//
+//        // get the user id from the logged in user
+//        if (null !== $this->security->getUser()) {
+//            $this->password = $this->security->getUser()->getPassword();
+//        }
     }
 
     public static function getEntityFqcn(): string

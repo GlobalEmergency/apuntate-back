@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Type;
+namespace GlobalEmergency\Apuntate\Type;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;

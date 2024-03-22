@@ -8,12 +8,12 @@ install: build composer
 
 .PHONY: build
 build:
-	@docker build -t cosmo-php-fpm -f etc/docker/php-fpm/dev/Dockerfile .
-	@docker build -t cosmo-pgsql -f etc/docker/postgres/Dockerfile etc/docker/postgres
+	@docker build -t $(PROJECT_NAME)-php-fpm -f etc/docker/php-fpm/dev/Dockerfile .
+	@docker build -t $(PROJECT_NAME)-pgsql -f etc/docker/postgres/Dockerfile etc/docker/postgres
 
 .PHONY: build-prod
 build-prod:
-	@docker build -t cosmo-php-fpm -f etc/docker/php-fpm/prod/Dockerfile .
+	@docker build -t $(PROJECT_NAME)-php-fpm -f etc/docker/php-fpm/prod/Dockerfile .
 
 .PHONY: up
 up:
@@ -43,7 +43,7 @@ endif
 db-update: ## Recreate database schema
 	@docker exec -u www-data --tty $(PROJECT_NAME)-php-fpm php ./bin/console doctrine:database:drop --if-exists --force $(ENV)
 	@docker exec -u www-data --tty $(PROJECT_NAME)-php-fpm php ./bin/console doctrine:database:create $(ENV)
-	@docker exec -u www-data --tty $(PROJECT_NAME)-php-fpm php ./bin/console doctrine:query:sql 'CREATE SCHEMA cosmo' $(ENV)
+	@docker exec -u www-data --tty $(PROJECT_NAME)-php-fpm php ./bin/console doctrine:query:sql 'CREATE SCHEMA $(PROJECT_NAME)' $(ENV)
 	@docker exec -u www-data --tty $(PROJECT_NAME)-php-fpm php ./bin/console doctrine:query:sql 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"' $(ENV)
 	@docker exec -u www-data --tty $(PROJECT_NAME)-php-fpm php ./bin/console doctrine:migrations:migrate --no-interaction $(ENV)
 

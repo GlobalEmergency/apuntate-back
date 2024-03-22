@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Services;
+namespace GlobalEmergency\Apuntate\Tests\Application\Services;
 
-use App\Entity\Service;
-use App\Repository\ServiceRepository;
-use App\Repository\UnitRepository;
+use GlobalEmergency\Apuntate\Entity\Service;
+use GlobalEmergency\Apuntate\Repository\ServiceRepository;
+use GlobalEmergency\Apuntate\Repository\UnitRepository;
 use PHPUnit\Framework\TestCase;
 
 class CreateGapsTest extends TestCase

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use App\Entity\Requirement;
+use GlobalEmergency\Apuntate\Entity\Requirement;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class RequirementCrudController extends AbstractCrudController

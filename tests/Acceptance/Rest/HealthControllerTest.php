@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 
-namespace App\Tests\Acceptance\Rest;
+namespace GlobalEmergency\Apuntate\Tests\Acceptance\Rest;
 
-use App\Shared\Infrastructure\Rest\HealthController;
+use GlobalEmergency\Apuntate\Shared\Infrastructure\Rest\HealthController;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -1,36 +1,25 @@
 <?php
 
-namespace App\Entity;
+namespace GlobalEmergency\Apuntate\Entity;
 
-use App\Repository\UnitComponentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
+use GlobalEmergency\Apuntate\Repository\UnitComponentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
-/**
- * @ORM\Entity(repositoryClass=UnitComponentRepository::class)
- */
+#[ORM\Entity(repositoryClass: UnitComponentRepository::class)]
 class UnitComponent
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: "uuid", unique: true)]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Unit::class, inversedBy="unitComponents")
-     */
+    #[ORM\ManyToOne(targetEntity: Unit::class, inversedBy: "unitComponents")]
     private $unit;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: "integer")]
     private $quantity = 1;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Component::class, inversedBy="unitComponents")
-     */
+    #[ORM\ManyToOne(targetEntity: Component::class, inversedBy: "unitComponents")]
     private $component;
 
     public function __construct()
