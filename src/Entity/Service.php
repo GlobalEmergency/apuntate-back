@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ServiceRepository;
 use App\Entity\Traits\Timestampable;
+use App\Repository\ServiceRepository;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
@@ -23,49 +23,49 @@ class Service
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      */
-    private $id;
+    private Uuid $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private string $description;
 
     /**
      * @ORM\Column(type="carbon")
      */
-    private $dateStart;
+    private \DateTimeInterface $dateStart;
 
     /**
      * @ORM\Column(type="carbon")
      */
-    private $dateEnd;
+    private \DateTimeInterface $dateEnd;
 
     /**
      * @ORM\Column(type="carbon")
      */
-    private $datePlace;
+    private \DateTimeInterface $datePlace;
 
     /**
      * @ORM\ManyToMany(targetEntity=Unit::class, inversedBy="services")
      * @MaxDepth(1)
      */
-    private $units;
+    private Collection $units;
 
     /**
      * @ORM\OneToMany(targetEntity=Gap::class, mappedBy="service",cascade={"persist"})
      * @MaxDepth(1)
      */
-    private $gaps;
+    private Collection $gaps;
 
     /**
      * @ORM\Column(type="serviceStatus")
      */
-    private $status;
+    private string $status;
 
     public function __construct()
     {
@@ -96,18 +96,19 @@ class Service
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getDateStart(): ?Carbon
+    public function getDateStart(): Carbon
     {
-        if ($this->dateStart instanceof \DateTime) {
+        if (!$this->dateStart instanceof Carbon) {
             $this->dateStart = Carbon::instance($this->dateStart);
         }
+
         return $this->dateStart;
     }
 
@@ -121,7 +122,7 @@ class Service
     }
 
     /**
-     * @return Collection|Unit[]
+     * @return Unit[]|Collection
      */
     public function getUnits(): Collection
     {
@@ -174,10 +175,7 @@ class Service
         return $this;
     }
 
-    /**
-     * @return Carbon
-     */
-    public function getDateEnd(): ?Carbon
+    public function getDateEnd(): Carbon
     {
         return $this->dateEnd;
     }
@@ -189,8 +187,10 @@ class Service
     {
         if (!$dateEnd instanceof Carbon) {
             $this->dateEnd = Carbon::instance($dateEnd);
+        } else {
+            $this->dateEnd = $dateEnd;
         }
-        $this->dateEnd = $dateEnd;
+
         return $this;
     }
 
@@ -204,18 +204,19 @@ class Service
 
     /**
      * @param mixed $datePlace
+     *
      * @return Service
      */
     public function setDatePlace(\DateTime $datePlace)
     {
         if (!$datePlace instanceof Carbon) {
             $this->datePlace = Carbon::instance($datePlace);
+        }else{
+            $this->datePlace = $datePlace;
         }
 
-        $this->datePlace = $datePlace;
         return $this;
     }
-
 
     public function __toString()
     {

@@ -16,13 +16,11 @@ final class CreateGaps
 
     private ServiceRepository $serviceRepository;
 
-    private UnitComponentRepository $unitComponentRepository;
 
-    public function __construct(UnitRepository $unitRepository, ServiceRepository $serviceRepository, UnitComponentRepository $unitComponentRepository)
+    public function __construct(UnitRepository $unitRepository, ServiceRepository $serviceRepository)
     {
         $this->unitRepository = $unitRepository;
         $this->serviceRepository = $serviceRepository;
-        $this->unitComponentRepository = $unitComponentRepository;
     }
 
     public function create(Service $service, array $holes): Service
@@ -32,6 +30,7 @@ final class CreateGaps
             if (is_null($unit)) {
                 continue;
             }
+            echo 'Unit '.$unit.' -> '.$amount.'<br />';
             $nexted = [];
             $holesCreated = 0;
             //First create one gap for each component, and store unitcomponents with more that one hole.
@@ -40,8 +39,9 @@ final class CreateGaps
                 $gap->setService($service);
                 $gap->setUnitComponent($unitComponent);
                 $service->addGap($gap);
-                echo '1 Add gap '.$unitComponent.'|'.$gap->getUnitComponent().'<br />';
                 ++$holesCreated;
+                echo $holesCreated.' Add gap '.$gap->getUnitComponent().'<br />';
+
                 if ($unitComponent->getQuantity() > 1) {
                     $nexted[] = [
                         $unitComponent,
@@ -50,10 +50,12 @@ final class CreateGaps
                 }
             }
             while ($amount > $holesCreated) {
-                echo "While $holesCreated <br />";
-                //Then create the gaps necesary to fill the holes.
-                foreach ($nexted as $key => [$unitComponent, $rest]) {
-                    echo "Foreach $holesCreated | $rest<br />";
+                echo "While $holesCreated | $amount <br />";
+                //Then create the gaps necessary to fill the holes.
+                foreach ($nexted as $key => $value) {
+                    $unitComponent = $value[0];
+                    $rest = $value[1];
+                    echo "Foreach $holesCreated | $rest | $unitComponent<br />";
                     if ($holesCreated >= $amount) {
                         break;
                     }
@@ -61,11 +63,12 @@ final class CreateGaps
                     $gap->setService($service);
                     $gap->setUnitComponent($unitComponent);
                     $service->addGap($gap);
-                    echo '2 Add gap '.$unitComponent.'|'.$gap->getUnitComponent().'<br />';
 
                     ++$holesCreated;
+                    echo $holesCreated.' Add gap '.$gap->getUnitComponent().'->'.$rest.' <br />';
+
                     if ($rest > 1) {
-                        $nexted[$key] = $rest - 1;
+                        $nexted[$key][1] = $rest - 1;
                     } else {
                         unset($nexted[$key]);
                         break;
@@ -73,7 +76,7 @@ final class CreateGaps
                 }
             }
         }
-        $this->serviceRepository->save($service);
+//        $this->serviceRepository->save($service);
 
         return $service;
     }

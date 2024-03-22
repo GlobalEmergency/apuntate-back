@@ -18,17 +18,17 @@ class Gap
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      */
-    private $id;
+    private \Symfony\Component\Uid\UuidV4 $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Service::class, inversedBy="gaps")
      */
-    private $service;
+    private ?Service $service;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="gaps")
      */
-    private $user;
+    private ?User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=UnitComponent::class)
