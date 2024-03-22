@@ -1,0 +1,3 @@
+api_controllers:
+  resource: ../Rest/
+  type: annotation
