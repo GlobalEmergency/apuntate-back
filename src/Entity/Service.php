@@ -2,6 +2,7 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
+use Composer\XdebugHandler\Status;
 use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use GlobalEmergency\Apuntate\Repository\ServiceRepository;
 use Carbon\Carbon;
@@ -45,7 +46,7 @@ class Service
     private Collection $gaps;
 
     #[ORM\Column(type: "string")]
-    private ServiceStatus $status;
+    private string $status;
 
     public function __construct()
     {
@@ -203,9 +204,9 @@ class Service
         return $this->name;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?ServiceStatus
     {
-        return $this->status;
+        return ServiceStatus::tryFrom($this->status);
     }
 
     public function setStatus(string $status): self
@@ -213,5 +214,4 @@ class Service
         $this->status = $status;
 
         return $this;
-    }
-}
+    }}

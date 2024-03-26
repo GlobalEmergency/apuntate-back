@@ -23,7 +23,29 @@ class ServiceCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $status = ChoiceField::new('status');
-        $status->setChoices(ServiceStatus::cases());
+        $choices = [];
+        foreach (ServiceStatus::cases() as $key => $choice) {
+            $choices[$choice->value] = $choice->value;
+        }
+        $status->setChoices($choices);
+//        $status->setFormTypeOptions([
+//
+//            'choice_value' => function (?ServiceStatus $entity = null) {
+//                return $entity?->value;
+//            },
+//            'choice_label' => function (?ServiceStatus $entity = null) {
+//                return $entity?->name;
+//            },
+//            'data_class' => null,
+//            'multiple' => false,
+//            'expanded' => false,
+//        ])
+        $status->setFormTypeOption('setter', function (Service $entity, ?string $value): void {
+            if(ServiceStatus::tryFrom($value) == null) {
+                return;
+            }
+            $entity->setStatus(ServiceStatus::tryFrom($value)->value);
+        });
 
         return [
             TextField::new('name'),
