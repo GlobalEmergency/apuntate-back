@@ -228,4 +228,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // TODO: Implement getUserIdentifier() method.
         return $this->getEmail();
     }
+
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $this->setDateStart(new \DateTime());
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
+    }
 }

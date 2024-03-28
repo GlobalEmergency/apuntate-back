@@ -13,11 +13,11 @@ use PHPUnit\Exception;
 
 final class CarbonIntervalType extends DateIntervalType implements CarbonDoctrineType
 {
-    public function getName()
+    public function getName() :string
     {
         return 'carbon_interval';
     }
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         if ($value === null || $value instanceof CarbonInterval) {
             return $value;
