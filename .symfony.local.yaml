@@ -1,0 +1,16 @@
+# Sets domain1.wip and domain2.wip for the current project
+#proxy:
+#  domains:
+#    - domain1
+#    - domain2
+
+http:
+  document_root: public/ # Path to the project document root
+  passthru: index.php # Project passthru index
+  port: 8081 # Force the port that will be used to run the server
+  preferred_port: 8081 # Preferred HTTP port [default: 8000]
+#  p12: path/to/p12_cert # Name of the file containing the TLS certificate to use in p12 format
+  allow_http: true # Prevent auto-redirection from HTTP to HTTPS
+  no_tls: true # Use HTTP instead of HTTPS
+  daemon: true # Run the server in the background
+  use_gzip: true # Toggle GZIP compression

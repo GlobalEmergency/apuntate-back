@@ -20,8 +20,8 @@ final class ServicesController extends AbstractController
     #[Route('/calendar', name: 'calendar', methods: ['GET'])]
     public function getCalendar(Request $request, ServiceRepository $serviceRepository)
     {
-        $dateStart = Carbon::createFromFormat('d-m-Y', $request->get('s'))->startOfDay();
-        $dateEnd = Carbon::createFromFormat('d-m-Y', $request->get('e'))->endOfDay();
+        $dateStart = Carbon::createFromFormat('d-m-Y', $request->get('s',Carbon::now()))->startOfDay();
+        $dateEnd = Carbon::createFromFormat('d-m-Y', $request->get('e',Carbon::now()))->endOfDay();
         $services = $serviceRepository->findBetweenDates($dateStart, $dateEnd);
 
         return new JsonResponse(CalendarTransform::transformServices($services));
