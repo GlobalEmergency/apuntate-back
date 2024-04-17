@@ -10,18 +10,18 @@ class ServiceStatusType extends Type
 {
     const NAME = 'serviceStatus';
 
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         $values = implode(",", array_map(function(ServiceStatus $case) { return "'".$case->name."'"; }, ServiceStatus::cases()));
         return "ENUM(".$values.")";
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         return ServiceStatus::from($value);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
     {
         if ($value instanceof ServiceStatus) {
             return $value->name;
@@ -30,12 +30,12 @@ class ServiceStatusType extends Type
         throw new \InvalidArgumentException('Invalid ServiceStatus');
     }
 
-    public function getName()
+    public function getName(): string
     {
         return self::NAME;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

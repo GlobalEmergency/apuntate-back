@@ -14,24 +14,18 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        api_token_refresh:
-            pattern: ^/api/auth/refresh
+        api:
+            pattern: ^/api
             stateless: true
-#            refresh_jwt: ~
-
-        login:
-            pattern: ^/api/auth
-            stateless: true
+            entry_point: jwt
             json_login:
-                check_path: /api/auth/login
+                check_path: /api/auth/login # or, if you have defined a route for your login path, the route name you used
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            jwt: ~
+            refresh_jwt:
+                check_path: /api/auth/refresh # or, you may use the `api_refresh_token` route name
 
-
-        api:
-            pattern:   ^/api
-            stateless: true
-#            jwt: ~
 
         main:
             lazy: true
@@ -52,7 +46,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/auth, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/auth/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
