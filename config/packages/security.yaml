@@ -31,7 +31,7 @@ security:
         api:
             pattern:   ^/api
             stateless: true
-            jwt: ~
+#            jwt: ~
 
         main:
             lazy: true
@@ -53,6 +53,6 @@ security:
     access_control:
         - { path: ^/api/auth, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/auth/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api,       roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

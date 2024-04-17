@@ -18,7 +18,7 @@ build-prod:
 .PHONY: up
 up:
 	docker-compose -f etc/docker/docker-compose.yaml -f etc/docker/docker-compose.dev.yaml -p $(PROJECT_NAME) up -d
-	make composer
+#	make composer
 
 .PHONY: up-gha
 up-gha:

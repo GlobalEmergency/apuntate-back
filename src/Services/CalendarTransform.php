@@ -22,8 +22,8 @@ final class CalendarTransform
         return [
             'id' => (string)$service->getId(),
             'title'=>$service->getName(),
-            'startTime' => $service->getDateStart()->format('D M d Y H:i:s O'),
-            'endTime' => $service->getDateEnd()->format('D M d Y H:i:s O'),
+            'start' => $service->getDateStart()->toIso8601String(),
+            'end' => $service->getDateEnd()->toIso8601String(),
             'allDay' => false,
         ];
     }
