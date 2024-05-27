@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GlobalEmergency\Apuntate\Tests\Mothers;
 
-use GlobalEmergency\Apuntate\Entity\Service;
 use Carbon\Carbon;
+use GlobalEmergency\Apuntate\Entity\Service;
 
 final class ServiceMother
 {
@@ -15,7 +15,7 @@ final class ServiceMother
         $service = new Service();
         $service->setName('Service 1');
         $service->setDescription('Description 1');
-        $service->setDatePlace(Carbon::)
+        //        $service->setDatePlace(Carbon::)
 
         return $service;
     }
