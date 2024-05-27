@@ -27,7 +27,7 @@ class CreateGapsTest extends TestCase
     {
         $service = new Service();
 
-        $holes = ["unitId" => 3];
-        $this->createGaps->create($service,$holes);
+        $holes = ['unitId' => 3];
+        $this->createGaps->create($service, $holes);
     }
 }

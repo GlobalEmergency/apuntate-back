@@ -2,9 +2,9 @@
 
 namespace GlobalEmergency\Apuntate\Repository;
 
-use GlobalEmergency\Apuntate\Entity\Gap;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use GlobalEmergency\Apuntate\Entity\Gap;
 
 /**
  * @method Gap|null find($id, $lockMode = null, $lockVersion = null)

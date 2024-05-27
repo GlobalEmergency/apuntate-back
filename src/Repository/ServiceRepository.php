@@ -2,10 +2,10 @@
 
 namespace GlobalEmergency\Apuntate\Repository;
 
-use GlobalEmergency\Apuntate\Entity\Service;
 use Carbon\Carbon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use GlobalEmergency\Apuntate\Entity\Service;
 
 /**
  * @method Service|null find($id, $lockMode = null, $lockVersion = null)
@@ -33,10 +33,10 @@ class ServiceRepository extends ServiceEntityRepository
 //            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
-    public function findNexts(\DateTime $date = null)
+    public function findNexts(?\DateTime $date = null)
     {
         if (is_null($date)) {
             $date = Carbon::now();
@@ -50,7 +50,7 @@ class ServiceRepository extends ServiceEntityRepository
             ->orderBy('s.dateStart', 'ASC')
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     public function save(Service $service): void

@@ -1,9 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace GlobalEmergency\Apuntate\Api\Infrastructure\Rest;
-
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,9 +17,9 @@ final class AlertController extends AbstractController
     public function get(): Response
     {
         return new JsonResponse([
-            ['id' => 1, 'title' => 'Alert 1', 'resume' => 'Description 1', 'show'=>true],
-            ['id' => 2, 'title' => 'Alert 2', 'resume' => 'Description 2', 'show'=>false],
-            ['id' => 3, 'title' => 'Alert 3', 'resume' => 'Description 3', 'show'=>false],
+            ['id' => 1, 'title' => 'Alert 1', 'resume' => 'Description 1', 'show' => true],
+            ['id' => 2, 'title' => 'Alert 2', 'resume' => 'Description 2', 'show' => false],
+            ['id' => 3, 'title' => 'Alert 3', 'resume' => 'Description 3', 'show' => false],
         ]);
     }
 

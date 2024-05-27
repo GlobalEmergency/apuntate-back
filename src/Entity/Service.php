@@ -2,13 +2,12 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
-use Composer\XdebugHandler\Status;
-use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
-use GlobalEmergency\Apuntate\Repository\ServiceRepository;
 use Carbon\Carbon;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\ServiceRepository;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Uid\Uuid;
 
@@ -19,33 +18,33 @@ class Service
     use Timestampable;
 
     #[ORM\Id]
-    #[ORM\Column(type: "uuid", unique: true)]
+    #[ORM\Column(type: 'uuid', unique: true)]
     private Uuid $id;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
-    #[ORM\Column(type: "text", nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private string $description;
 
-    #[ORM\Column(type: "carbon")]
+    #[ORM\Column(type: 'carbon')]
     private \DateTimeInterface $dateStart;
 
-    #[ORM\Column(type: "carbon")]
+    #[ORM\Column(type: 'carbon')]
     private \DateTimeInterface $dateEnd;
 
-    #[ORM\Column(type: "carbon")]
+    #[ORM\Column(type: 'carbon')]
     private \DateTimeInterface $datePlace;
 
-    #[ORM\ManyToMany(targetEntity: Unit::class, inversedBy: "services")]
+    #[ORM\ManyToMany(targetEntity: Unit::class, inversedBy: 'services')]
     #[MaxDepth(1)]
     private Collection $units;
 
-    #[ORM\OneToMany(targetEntity: Gap::class, mappedBy: "service",cascade: ["persist"])]
+    #[ORM\OneToMany(targetEntity: Gap::class, mappedBy: 'service', cascade: ['persist'])]
     #[MaxDepth(1)]
     private Collection $gaps;
 
-    #[ORM\Column(type: "string")]
+    #[ORM\Column(type: 'string')]
     private string $status;
 
     public function __construct()
@@ -178,9 +177,6 @@ class Service
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDatePlace()
     {
         return $this->datePlace;
@@ -188,14 +184,12 @@ class Service
 
     /**
      * @param mixed $datePlace
-     *
-     * @return Service
      */
     public function setDatePlace(\DateTime $datePlace): self
     {
         if (!$datePlace instanceof Carbon) {
             $this->datePlace = Carbon::instance($datePlace);
-        }else{
+        } else {
             $this->datePlace = $datePlace;
         }
 
@@ -217,4 +211,5 @@ class Service
         $this->status = $status;
 
         return $this;
-    }}
+    }
+}

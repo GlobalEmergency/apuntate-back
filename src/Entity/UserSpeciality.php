@@ -2,9 +2,9 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use GlobalEmergency\Apuntate\Repository\UserSpecialityRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: UserSpecialityRepository::class)]
@@ -14,21 +14,21 @@ class UserSpeciality
     use Timestampable;
 
     #[ORM\Id]
-    #[ORM\Column(type: "uuid", unique: true)]
+    #[ORM\Column(type: 'uuid', unique: true)]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: Speciality::class, inversedBy: "userSpecialities")]
+    #[ORM\ManyToOne(targetEntity: Speciality::class, inversedBy: 'userSpecialities')]
     #[ORM\JoinColumn(nullable: false)]
     private $speciality;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "userSpecialities")]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'userSpecialities')]
     #[ORM\JoinColumn(nullable: false)]
     private User $user;
 
-    #[ORM\Column(type: "date")]
+    #[ORM\Column(type: 'date')]
     private $dateStart;
 
-    #[ORM\Column(type: "date", nullable: true)]
+    #[ORM\Column(type: 'date', nullable: true)]
     private $dateEnd;
 
     public function __construct()
@@ -85,6 +85,7 @@ class UserSpeciality
     public function setUser(User $user): self
     {
         $this->user = $user;
+
         return $this;
     }
 }

@@ -26,7 +26,7 @@ trait Timestampable
     }
 
     /**
-     * Gets triggered every time on update
+     * Gets triggered every time on update.
      *
      * @ORM\PreUpdate
      */
@@ -37,7 +37,7 @@ trait Timestampable
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      */
@@ -49,7 +49,7 @@ trait Timestampable
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -59,7 +59,7 @@ trait Timestampable
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      */
@@ -71,7 +71,7 @@ trait Timestampable
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GlobalEmergency\Apuntate\Controller\Manager;
 
-use GlobalEmergency\Apuntate\Application\Services\CreateGaps;
-use GlobalEmergency\Apuntate\Entity\Service;
-use GlobalEmergency\Apuntate\Repository\ServiceRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -15,6 +12,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use GlobalEmergency\Apuntate\Application\Services\CreateGaps;
+use GlobalEmergency\Apuntate\Entity\Service;
+use GlobalEmergency\Apuntate\Repository\ServiceRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -71,18 +71,18 @@ final class ServiceController extends AbstractDashboardController
         return parent::configureUserMenu($user);
     }
 
-//    public function configureCrud(): Crud
-//    {
-//        // TODO: Implement configureCrud() method.
-//    }
-//
-//    public function configureActions(): Actions
-//    {
-//        // TODO: Implement configureActions() method.
-//    }
-//
-//    public function configureFilters(): Filters
-//    {
-//        // TODO: Implement configureFilters() method.
-//    }
+    //    public function configureCrud(): Crud
+    //    {
+    //        // TODO: Implement configureCrud() method.
+    //    }
+    //
+    //    public function configureActions(): Actions
+    //    {
+    //        // TODO: Implement configureActions() method.
+    //    }
+    //
+    //    public function configureFilters(): Filters
+    //    {
+    //        // TODO: Implement configureFilters() method.
+    //    }
 }

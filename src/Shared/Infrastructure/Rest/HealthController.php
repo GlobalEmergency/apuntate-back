@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace GlobalEmergency\Apuntate\Shared\Infrastructure\Rest;
 
@@ -17,7 +17,6 @@ final class HealthController
      */
     public function health(): Response
     {
-        return new Response("OK");
+        return new Response('OK');
     }
-
 }

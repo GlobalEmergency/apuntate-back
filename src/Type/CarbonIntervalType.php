@@ -9,27 +9,27 @@ use Carbon\Doctrine\CarbonDoctrineType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateIntervalType;
-use PHPUnit\Exception;
 
 final class CarbonIntervalType extends DateIntervalType implements CarbonDoctrineType
 {
-    public function getName() :string
+    public function getName(): string
     {
         return 'carbon_interval';
     }
+
     public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
-        if ($value === null || $value instanceof CarbonInterval) {
+        if (null === $value || $value instanceof CarbonInterval) {
             return $value;
         }
 
         $negative = false;
 
-        if (isset($value[0]) && ($value[0] === '+' || $value[0] === '-')) {
-            $negative = $value[0] === '-';
-            $value    = substr($value, 1);
+        if (isset($value[0]) && ('+' === $value[0] || '-' === $value[0])) {
+            $negative = '-' === $value[0];
+            $value = substr($value, 1);
         }
-        if ($value === "") {
+        if ('' === $value) {
             return new CarbonInterval(0, 0, 0, 0, 1);
         }
 
@@ -37,7 +37,7 @@ final class CarbonIntervalType extends DateIntervalType implements CarbonDoctrin
             $interval = new CarbonInterval($value);
         } catch (\Exception $exception) {
             try {
-                $interval = CarbonInterval::createFromFormat("H:i:s", $value);
+                $interval = CarbonInterval::createFromFormat('H:i:s', $value);
             } catch (\Exception $ex) {
                 throw ConversionException::conversionFailedFormat($value, $this->getName(), self::FORMAT, $exception);
             }
@@ -45,6 +45,7 @@ final class CarbonIntervalType extends DateIntervalType implements CarbonDoctrin
         if ($negative) {
             $interval->invert = 1;
         }
+
         return $interval;
     }
 }

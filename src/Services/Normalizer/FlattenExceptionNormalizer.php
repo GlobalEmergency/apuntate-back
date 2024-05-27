@@ -1,16 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace GlobalEmergency\Apuntate\Services\Normalizer;
-
 
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class FlattenExceptionNormalizer implements NormalizerInterface
 {
-    public function normalize($object, string $format = null, array $context = []): float|array|\ArrayObject|bool|int|string|null
+    public function normalize($object, ?string $format = null, array $context = []): float|array|\ArrayObject|bool|int|string|null
     {
         return [
             'status' => $object->getStatusCode(),
@@ -21,7 +20,7 @@ final class FlattenExceptionNormalizer implements NormalizerInterface
         ];
     }
 
-    public function supportsNormalization($data, string $format = null, array $context = []): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof FlattenException;
     }

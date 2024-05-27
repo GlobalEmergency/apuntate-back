@@ -2,15 +2,12 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
-use GlobalEmergency\Apuntate\Repository\SpecialityRepository;
-use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
+use GlobalEmergency\Apuntate\Repository\SpecialityRepository;
 use Symfony\Component\Uid\Uuid;
-use Symfony\Component\Uid\UuidV4;
-
 
 #[ORM\Entity(repositoryClass: SpecialityRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -19,19 +16,19 @@ class Speciality
     use Timestampable;
 
     #[ORM\Id]
-    #[ORM\Column(type: "uuid", unique: true)]
+    #[ORM\Column(type: 'uuid', unique: true)]
     private $id;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $abbreviation;
 
-    #[ORM\OneToMany(targetEntity: UserSpeciality::class, mappedBy: "speciality", orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: UserSpeciality::class, mappedBy: 'speciality', orphanRemoval: true)]
     private $userSpecialities;
 
-    #[ORM\OneToMany(targetEntity: Unit::class, mappedBy: "speciality")]
+    #[ORM\OneToMany(targetEntity: Unit::class, mappedBy: 'speciality')]
     private $units;
 
     public function __construct()

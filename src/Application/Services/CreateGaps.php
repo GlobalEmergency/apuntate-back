@@ -7,7 +7,6 @@ namespace GlobalEmergency\Apuntate\Application\Services;
 use GlobalEmergency\Apuntate\Entity\Gap;
 use GlobalEmergency\Apuntate\Entity\Service;
 use GlobalEmergency\Apuntate\Repository\ServiceRepository;
-use GlobalEmergency\Apuntate\Repository\UnitComponentRepository;
 use GlobalEmergency\Apuntate\Repository\UnitRepository;
 
 final class CreateGaps
@@ -15,7 +14,6 @@ final class CreateGaps
     private UnitRepository $unitRepository;
 
     private ServiceRepository $serviceRepository;
-
 
     public function __construct(UnitRepository $unitRepository, ServiceRepository $serviceRepository)
     {
@@ -33,7 +31,7 @@ final class CreateGaps
             echo 'Unit '.$unit.' -> '.$amount.'<br />';
             $nexted = [];
             $holesCreated = 0;
-            //First create one gap for each component, and store unitcomponents with more that one hole.
+            // First create one gap for each component, and store unitcomponents with more that one hole.
             foreach ($unit->getUnitComponents() as $unitComponent) {
                 $gap = new Gap();
                 $gap->setService($service);
@@ -51,7 +49,7 @@ final class CreateGaps
             }
             while ($amount > $holesCreated) {
                 echo "While $holesCreated | $amount <br />";
-                //Then create the gaps necessary to fill the holes.
+                // Then create the gaps necessary to fill the holes.
                 foreach ($nexted as $key => $value) {
                     $unitComponent = $value[0];
                     $rest = $value[1];
@@ -76,7 +74,7 @@ final class CreateGaps
                 }
             }
         }
-//        $this->serviceRepository->save($service);
+        //        $this->serviceRepository->save($service);
 
         return $service;
     }

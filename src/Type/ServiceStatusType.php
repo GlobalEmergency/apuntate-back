@@ -8,12 +8,13 @@ use GlobalEmergency\Apuntate\Entity\ServiceStatus;
 
 class ServiceStatusType extends Type
 {
-    const NAME = 'serviceStatus';
+    public const NAME = 'serviceStatus';
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
-        $values = implode(",", array_map(function(ServiceStatus $case) { return "'".$case->name."'"; }, ServiceStatus::cases()));
-        return "ENUM(".$values.")";
+        $values = implode(',', array_map(function (ServiceStatus $case) { return "'".$case->name."'"; }, ServiceStatus::cases()));
+
+        return 'ENUM('.$values.')';
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform): mixed
@@ -21,7 +22,7 @@ class ServiceStatusType extends Type
         return ServiceStatus::from($value);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if ($value instanceof ServiceStatus) {
             return $value->name;

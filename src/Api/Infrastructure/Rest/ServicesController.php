@@ -19,7 +19,7 @@ use Symfony\Component\Uid\Uuid;
 final class ServicesController extends AbstractController
 {
     #[Route('/nexts', name: 'nexts', methods: ['GET'])]
-    public function nexts(Request $request, ServiceRepository $serviceRepository,SerializerInterface $serializer)
+    public function nexts(Request $request, ServiceRepository $serviceRepository, SerializerInterface $serializer)
     {
         $services = $serviceRepository->findNexts();
 
@@ -29,8 +29,8 @@ final class ServicesController extends AbstractController
     #[Route('/calendar', name: 'calendar', methods: ['GET'])]
     public function getCalendar(Request $request, ServiceRepository $serviceRepository)
     {
-        $dateStart = Carbon::parseFromLocale($request->get('s',Carbon::now()->startOfMonth()->format('d-m-Y')))->startOfDay();
-        $dateEnd = Carbon::parseFromLocale($request->get('e',Carbon::now()->endOfMonth()->format('d-m-Y')))->endOfDay();
+        $dateStart = Carbon::parseFromLocale($request->get('s', Carbon::now()->startOfMonth()->format('d-m-Y')))->startOfDay();
+        $dateEnd = Carbon::parseFromLocale($request->get('e', Carbon::now()->endOfMonth()->format('d-m-Y')))->endOfDay();
         $services = $serviceRepository->findBetweenDates($dateStart, $dateEnd);
 
         return new JsonResponse(CalendarTransform::transformServices($services));
@@ -41,6 +41,7 @@ final class ServicesController extends AbstractController
     {
         $service = $serializer->deserialize($request->getContent(), Service::class, 'json');
         $serviceRepository->save($service);
+
         return new JsonResponse(null, 201);
     }
 

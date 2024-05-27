@@ -2,10 +2,11 @@
 
 namespace GlobalEmergency\Apuntate\Controller\Admin;
 
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use GlobalEmergency\Apuntate\Controller\API\ServicesController;
 use GlobalEmergency\Apuntate\Entity\Component;
-use GlobalEmergency\Apuntate\Entity\Entity;
 use GlobalEmergency\Apuntate\Entity\Gap;
 use GlobalEmergency\Apuntate\Entity\Requirement;
 use GlobalEmergency\Apuntate\Entity\Service;
@@ -14,9 +15,6 @@ use GlobalEmergency\Apuntate\Entity\Unit;
 use GlobalEmergency\Apuntate\Entity\UnitComponent;
 use GlobalEmergency\Apuntate\Entity\User;
 use GlobalEmergency\Apuntate\Entity\UserSpeciality;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,6 +24,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+
         return $this->redirect($adminUrlGenerator->setController(ServiceCrudController::class)->generateUrl());
     }
 

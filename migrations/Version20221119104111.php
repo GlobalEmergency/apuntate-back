@@ -6,7 +6,6 @@ namespace DoctrineMigrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Symfony\Component\Uid\Uuid;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -48,9 +47,9 @@ final class Version20221119104111 extends AbstractMigration
         $this->addSql('ALTER TABLE user_speciality ADD CONSTRAINT FK_54B06662A76ED395 FOREIGN KEY (user_id) REFERENCES users (id)');
         $this->addSql('ALTER TABLE user_requirement ADD CONSTRAINT FK_72249CC5A76ED395 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE user_requirement ADD CONSTRAINT FK_72249CC57B576F77 FOREIGN KEY (requirement_id) REFERENCES requirement (id) ON DELETE CASCADE');
-        //Create admin@admin.com user with default admin pass
+        // Create admin@admin.com user with default admin pass
         $pass = '$argon2id$v=19$m=65536,t=4,p=1$UghdW1ppqE4oRR3LyINF6A$6t3Wma7bqBnPeA/IAFaSgto3iJG9UEnNa2QVJCtb1Bk';
-        $uid = rand(9999,99999999);
+        $uid = rand(9999, 99999999);
         $this->addSql("INSERT INTO users (`id`, `name`, `surname`, `email`, `password`, `date_start`, `date_end`, `roles`, `created_at`, `updated_at`) VALUES ('$uid', 'admin', 'admin', 'admin@admin.com', '$pass', '2022-11-19', '2022-11-19', '[\'ROLE_ADMIN\']', '2022-11-19 11:46:29.000000', '2022-11-19 11:46:31.000000');");
     }
 

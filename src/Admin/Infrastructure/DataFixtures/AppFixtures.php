@@ -11,15 +11,15 @@ class AppFixtures extends Fixture
 {
     public function __construct(
         private UserPasswordHasherInterface $passwordEncoder
-    )
-    {
+    ) {
     }
     private ObjectManager $manager;
+
     public function load(ObjectManager $manager): void
     {
         $this->manager = $manager;
 
-        $this->createUser('admin@admin.com','admin');
+        $this->createUser('admin@admin.com', 'admin');
 
         $this->manager->flush();
     }
