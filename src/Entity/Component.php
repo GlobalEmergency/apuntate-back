@@ -2,38 +2,29 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
+use GlobalEmergency\Apuntate\Entity\Requirement;
+use GlobalEmergency\Apuntate\Repository\ComponentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use GlobalEmergency\Apuntate\Repository\ComponentRepository;
 use Symfony\Component\Uid\Uuid;
 
-/**
- * @ORM\Entity(repositoryClass=ComponentRepository::class)
- */
+
+#[ORM\Entity(repositoryClass: ComponentRepository::class)]
 class Component
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: "uuid", unique: true)]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: "string", length: 255)]
     private $name;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Requirement::class, inversedBy="components")
-     */
+    #[ORM\ManyToMany(targetEntity: Requirement::class, inversedBy: "components")]
     private $requirements;
 
-    /**
-     * @ORM\OneToMany(targetEntity=UnitComponent::class, mappedBy="component")
-     */
+    #[ORM\OneToMany(targetEntity: UnitComponent::class, mappedBy: "component")]
     private $unitComponents;
-
     public function __construct()
     {
         $this->id = Uuid::v4();

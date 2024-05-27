@@ -2,8 +2,8 @@
 
 namespace GlobalEmergency\Apuntate\Controller\Admin;
 
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use GlobalEmergency\Apuntate\Entity\Requirement;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class RequirementCrudController extends AbstractCrudController
 {

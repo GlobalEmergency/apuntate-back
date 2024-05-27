@@ -2,14 +2,16 @@
 
 namespace GlobalEmergency\Apuntate\Controller\Admin;
 
+use GlobalEmergency\Apuntate\Entity\Service;
+use GlobalEmergency\Apuntate\Entity\ServiceStatus;
+use GlobalEmergency\Apuntate\Type\ServiceStatusType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use GlobalEmergency\Apuntate\Entity\Service;
-use GlobalEmergency\Apuntate\Type\ServiceStatusType;
 
 class ServiceCrudController extends AbstractCrudController
 {
@@ -21,7 +23,29 @@ class ServiceCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $status = ChoiceField::new('status');
-        $status->setChoices(ServiceStatusType::getValues());
+        $choices = [];
+        foreach (ServiceStatus::cases() as $key => $choice) {
+            $choices[$choice->value] = $choice->value;
+        }
+        $status->setChoices($choices);
+//        $status->setFormTypeOptions([
+//
+//            'choice_value' => function (?ServiceStatus $entity = null) {
+//                return $entity?->value;
+//            },
+//            'choice_label' => function (?ServiceStatus $entity = null) {
+//                return $entity?->name;
+//            },
+//            'data_class' => null,
+//            'multiple' => false,
+//            'expanded' => false,
+//        ])
+        $status->setFormTypeOption('setter', function (Service $entity, ?string $value): void {
+            if(ServiceStatus::tryFrom($value) == null) {
+                return;
+            }
+            $entity->setStatus(ServiceStatus::tryFrom($value)->value);
+        });
 
         return [
             TextField::new('name'),
@@ -32,7 +56,7 @@ class ServiceCrudController extends AbstractCrudController
 
             $status,
 
-            AssociationField::new('units'),
+            AssociationField::new('units')
         ];
     }
 }

@@ -14,6 +14,5 @@ gesdinet_jwt_refresh_token:
   defaults:
     _format: json
 
-
-include: { resource: ../src/Api/Infrastructure/Symfony/routes.yml }
-
+api_infra_routes:
+  resource: ../src/Api/Infrastructure/Symfony/routes.yaml

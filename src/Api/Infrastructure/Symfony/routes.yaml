@@ -1,0 +1,6 @@
+api_services:
+  resource: GlobalEmergency\Apuntate\Api\Infrastructure\Rest\ServicesController
+api_profiler:
+  resource: GlobalEmergency\Apuntate\Api\Infrastructure\Rest\ProfileController
+api_alerts:
+  resource: GlobalEmergency\Apuntate\Api\Infrastructure\Rest\AlertController

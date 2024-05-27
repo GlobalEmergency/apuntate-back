@@ -2,9 +2,9 @@
 
 namespace GlobalEmergency\Apuntate\Repository;
 
+use GlobalEmergency\Apuntate\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use GlobalEmergency\Apuntate\Entity\User;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)

@@ -2,10 +2,10 @@
 
 namespace GlobalEmergency\Apuntate\Controller\Admin;
 
+use GlobalEmergency\Apuntate\Entity\UnitComponent;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use GlobalEmergency\Apuntate\Entity\UnitComponent;
 
 class UnitComponentCrudController extends AbstractCrudController
 {

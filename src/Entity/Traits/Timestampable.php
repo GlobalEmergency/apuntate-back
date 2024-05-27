@@ -12,25 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait Timestampable
 {
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="carbon")
-     */
-    private $createdAt;
+    #[ORM\Column]
+    private \DateTime $createdAt;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="carbon")
-     */
-    private $updatedAt;
+    #[ORM\Column]
+    private \DateTime $updatedAt;
 
-    /**
-     * Gets triggered only on insert.
-     *
-     * @ORM\PrePersist
-     */
+    #[ORM\PrePersist]
     public function onPrePersist()
     {
         $this->createdAt = new \DateTime();
@@ -38,17 +26,18 @@ trait Timestampable
     }
 
     /**
-     * Gets triggered every time on update.
+     * Gets triggered every time on update
      *
      * @ORM\PreUpdate
      */
+    #[ORM\PreUpdate]
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime();
     }
 
     /**
-     * Set createdAt.
+     * Set createdAt
      *
      * @param \DateTime $createdAt
      */
@@ -60,7 +49,7 @@ trait Timestampable
     }
 
     /**
-     * Get createdAt.
+     * Get createdAt
      *
      * @return \DateTime
      */
@@ -70,7 +59,7 @@ trait Timestampable
     }
 
     /**
-     * Set updatedAt.
+     * Set updatedAt
      *
      * @param \DateTime $updatedAt
      */
@@ -82,7 +71,7 @@ trait Timestampable
     }
 
     /**
-     * Get updatedAt.
+     * Get updatedAt
      *
      * @return \DateTime
      */

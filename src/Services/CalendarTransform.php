@@ -14,17 +14,16 @@ final class CalendarTransform
         foreach ($services as $service) {
             $events[] = self::transformService($service);
         }
-
         return $events;
     }
 
     public static function transformService(Service $service): array
     {
         return [
-            'id' => (string) $service->getId(),
-            'title' => $service->getName(),
-            'startTime' => $service->getDateStart()->format('D M d Y H:i:s O'),
-            'endTime' => $service->getDateEnd()->format('D M d Y H:i:s O'),
+            'id' => (string)$service->getId(),
+            'title'=>$service->getName(),
+            'start' => $service->getDateStart()->toIso8601String(),
+            'end' => $service->getDateEnd()->toIso8601String(),
             'allDay' => false,
         ];
     }

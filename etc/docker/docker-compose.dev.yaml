@@ -1,0 +1,17 @@
+version: '3.6'
+
+services:
+  php-fpm:
+    user: root
+    volumes:
+      - ~/.aws:/var/www/.aws
+      - ~/.composer:/var/www/.composer
+      - ~/.ssh:/var/www/.ssh
+      - ../../:/var/www/html/:delegated
+    ports:
+      - "8081:80"
+    environment:
+      PHP_IDE_CONFIG: "serverName=apuntate,apuntate_test"
+  pgsql:
+    ports:
+      - "5432:5432"

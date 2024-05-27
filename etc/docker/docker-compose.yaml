@@ -1,0 +1,28 @@
+version: '3.6'
+
+services:
+  php-fpm:
+    image: apuntate-php-fpm
+    build:
+      context: ../../
+      dockerfile: etc/docker/php-fpm/dev/Dockerfile
+    container_name: apuntate-php-fpm
+    depends_on:
+      - pgsql
+    working_dir: /var/www/html
+    user: www-data
+  pgsql:
+    image: apuntate-pgsql
+    build:
+      context: ./postgres
+    container_name: apuntate-pgsql
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: admin
+      POSTGRES_DATABASES: apuntate apuntate_test
+    volumes:
+      - pgsql-data:/var/lib/postgresql/data
+
+volumes:
+    pgsql-data:
+      driver: local

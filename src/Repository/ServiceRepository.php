@@ -2,10 +2,10 @@
 
 namespace GlobalEmergency\Apuntate\Repository;
 
+use GlobalEmergency\Apuntate\Entity\Service;
 use Carbon\Carbon;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use GlobalEmergency\Apuntate\Entity\Service;
 
 /**
  * @method Service|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,7 +20,10 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
-    public function findBetweenDates(\DateTime $dateStart, \DateTime $dateEnd)
+    /**
+     * @return Service[] Returns an array of Service objects
+     */
+    public function findBetweenDates(\DateTime $dateStart, \DateTime $dateEnd): array
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.dateStart BETWEEN :start AND :end')
@@ -30,47 +33,15 @@ class ServiceRepository extends ServiceEntityRepository
 //            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
-    // /**
-    //  * @return Service[] Returns an array of Service objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Service
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-    public function findNexts(\DateTime $date = null, bool $prev = false)
+    public function findNexts(\DateTime $date = null)
     {
         if (is_null($date)) {
             $date = Carbon::now();
         } elseif ($date instanceof \DateTime) {
             $date = Carbon::instance($date);
-        }
-
-        if ($prev) {
-            $date->subDays(15);
         }
 
         return $this->createQueryBuilder('s')
@@ -79,12 +50,12 @@ class ServiceRepository extends ServiceEntityRepository
             ->orderBy('s.dateStart', 'ASC')
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
-    public function save(Service $service)
+    public function save(Service $service): void
     {
-        $this->_em->persist($service);
-        $this->_em->flush($service);
+        $this->getEntityManager()->persist($service);
+        $this->getEntityManager()->flush();
     }
 }

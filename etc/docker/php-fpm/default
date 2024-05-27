@@ -1,0 +1,86 @@
+    log_format json_custom escape=json
+    '{'
+      '"http.url":"$request_uri",'
+      '"http.version":"$server_protocol",'
+      '"http.status_code":$status,'
+      '"http.method":"$request_method",'
+      '"http.referer":"$http_referer",'
+      '"http.useragent":"$http_user_agent",'
+      '"time_local":"$time_local",'
+      '"remote_addr":"$remote_addr",'
+      '"remote_user":"$remote_user",'
+      '"body_bytes_sent":"$body_bytes_sent",'
+      '"request_time":$request_time,'
+      '"response_content_type":"$sent_http_content_type",'
+      '"X-Proxy-Forwarded-For":"$proxy_add_x_forwarded_for",'
+      '"X-Real-IP":"$http_realip",'
+      '"X-Forwarded-For":"$http_x_forwarded_for",'
+    '"dd.trace_id":"$http_x_datadog_trace_id",'
+    '"dd.span_id":"$http_x_datadog_span_id",'
+      '"ddsource":"nginx"'
+    '}';
+    access_log /dev/stdout json_custom;
+    error_log /dev/stderr;
+
+server {
+    listen 80 default_server;
+	listen [::]:80 default_server;
+
+    proxy_read_timeout 300;
+    proxy_connect_timeout 300;
+    proxy_send_timeout 300;
+
+    root /var/www/html/public;
+
+    server_name _;
+
+    location / {
+        # try to serve file directly, fallback to index.php
+        try_files $uri /index.php$is_args$args;
+    }
+
+    # optionally disable falling back to PHP script for the asset directories;
+    # nginx will return a 404 error when files are not found instead of passing the
+    # request to Symfony (improves performance but Symfony's 404 page is not displayed)
+    # location /bundles {
+    #     try_files $uri =404;
+    # }
+
+    location ~ ^/index\.php(/|$) {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_read_timeout 300;
+
+        # optionally set the value of the environment variables used in the application
+        # fastcgi_param APP_ENV prod;
+        # fastcgi_param APP_SECRET <app-secret-id>;
+        # fastcgi_param DATABASE_URL "mysql://db_user:db_pass@host:3306/db_name";
+
+        # When you are using symlinks to link the document root to the
+        # current version of your application, you should pass the real
+        # application path instead of the path to the symlink to PHP
+        # FPM.
+        # Otherwise, PHP's OPcache may not properly detect changes to
+        # your PHP files (see https://github.com/zendtech/ZendOptimizerPlus/issues/126
+        # for more information).
+        # Caveat: When PHP-FPM is hosted on a different machine from nginx
+        #         $realpath_root may not resolve as you expect! In this case try using
+        #         $document_root instead.
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+        # Prevents URIs that include the front controller. This will 404:
+        # http://domain.tld/index.php/some-path
+        # Remove the internal directive to allow URIs like this
+        internal;
+    }
+
+    # return 404 for all other php files not matching the front controller
+    # this prevents access to other php files you don't want to be accessible.
+    location ~ \.php$ {
+        return 404;
+    }
+
+    access_log /dev/stdout json_custom;
+    error_log /dev/stderr;
+}

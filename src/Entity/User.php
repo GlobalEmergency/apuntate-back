@@ -2,74 +2,51 @@
 
 namespace GlobalEmergency\Apuntate\Entity;
 
+use GlobalEmergency\Apuntate\Repository\UserRepository;
+use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use GlobalEmergency\Apuntate\Entity\Traits\Timestampable;
-use GlobalEmergency\Apuntate\Repository\UserRepository;
-use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="users")
- * @ORM\HasLifecycleCallbacks
- */
-class User implements UserInterface
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: "users")]
+#[ORM\HasLifecycleCallbacks]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestampable;
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
-    private Uuid $id;
+    #[ORM\Id]
+    #[ORM\Column(type: "uuid", unique: true)]
+    private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $name;
+    #[ORM\Column(type: "string", length: 255)]
+    private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $surname;
+    #[ORM\Column(type: "string", length: 255)]
+    private $surname;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $email;
+    #[ORM\Column(type: "string", length: 255)]
+    private $email;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $password;
+    #[ORM\Column(type: "string", length: 255)]
+    private $password;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private \DateTime $dateStart;
+    #[ORM\Column(type: "date")]
+    private $dateStart;
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private \DateTime $dateEnd;
+    #[ORM\Column(type: "date", nullable: true)]
+    private $dateEnd;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    private array $roles = [];
+    #[ORM\Column(type: "array")]
+    private $roles = [];
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Requirement::class, inversedBy="users")
-     */
+    #[ORM\ManyToMany(targetEntity: Requirement::class, inversedBy: "users")]
     private $requirements;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Gap::class, mappedBy="user")
-     */
+    #[ORM\OneToMany(targetEntity: Gap::class, mappedBy: "user")]
     private $gaps;
 
     public function __construct()
@@ -130,7 +107,6 @@ class User implements UserInterface
         if (!is_null($password)) {
             $this->password = $password;
         }
-
         return $this;
     }
 
@@ -181,10 +157,10 @@ class User implements UserInterface
         return null;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // TODO: Implement eraseCredentials() method.
-        return null;
+        return;
     }
 
     public function getUsername()
@@ -251,5 +227,13 @@ class User implements UserInterface
     {
         // TODO: Implement getUserIdentifier() method.
         return $this->getEmail();
+    }
+
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $this->setDateStart(new \DateTime());
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 }

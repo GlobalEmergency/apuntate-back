@@ -2,54 +2,41 @@
 
 namespace GlobalEmergency\Apuntate\Type;
 
-class ServiceStatusType extends EnumType
+use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\Type;
+use GlobalEmergency\Apuntate\Entity\ServiceStatus;
+
+class ServiceStatusType extends Type
 {
-    /**
-     * Service in elaboration.
-     */
-    public const DRAFT = 'draft';
+    const NAME = 'serviceStatus';
 
-    /**
-     * Service requested.
-     */
-    public const REQUESTED = 'requested';
-
-    /**
-     * Service accepted and is being sended to volunteers.
-     */
-    public const ACCEPTED = 'accepted';
-
-    /**
-     * Service rejected by agrupation.
-     */
-    public const REJECTED = 'rejected';
-
-    /**
-     * Service with volunteers confirmed.
-     */
-    public const CONFIRMED = 'confirmed';
-
-    /**
-     * Service cancelled by requester.
-     */
-    public const CANCELLED = 'cancelled';
-
-    /**
-     * Service pending to be analyzed.
-     */
-    public const DEBRIEFING = 'debriefing';
-
-    /**
-     * Finished service.
-     */
-    public const FINISHED = 'finished';
-
-    protected string $name = 'serviceStatus';
-
-    public static function getValues()
+    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
-        $refl = new \ReflectionClass(__CLASS__);
+        $values = implode(",", array_map(function(ServiceStatus $case) { return "'".$case->name."'"; }, ServiceStatus::cases()));
+        return "ENUM(".$values.")";
+    }
 
-        return $refl->getConstants();
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
+    {
+        return ServiceStatus::from($value);
+    }
+
+    public function convertToDatabaseValue($value, AbstractPlatform $platform) : mixed
+    {
+        if ($value instanceof ServiceStatus) {
+            return $value->name;
+        }
+
+        throw new \InvalidArgumentException('Invalid ServiceStatus');
+    }
+
+    public function getName(): string
+    {
+        return self::NAME;
+    }
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
+    {
+        return true;
     }
 }
