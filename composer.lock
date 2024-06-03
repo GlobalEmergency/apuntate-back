@@ -5514,16 +5514,16 @@
         },
         {
             "name": "symfony/property-info",
-            "version": "v7.0.3",
+            "version": "v7.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
-                "reference": "e160f92ea827243abf2dbf36b8460b1377194406"
+                "reference": "f03a32b9349352571d5a2b4639dadac461ee94b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-info/zipball/e160f92ea827243abf2dbf36b8460b1377194406",
-                "reference": "e160f92ea827243abf2dbf36b8460b1377194406",
+                "url": "https://api.github.com/repos/symfony/property-info/zipball/f03a32b9349352571d5a2b4639dadac461ee94b5",
+                "reference": "f03a32b9349352571d5a2b4639dadac461ee94b5",
                 "shasum": ""
             },
             "require": {
@@ -5577,7 +5577,7 @@
                 "validator"
             ],
             "support": {
-                "source": "https://github.com/symfony/property-info/tree/v7.0.3"
+                "source": "https://github.com/symfony/property-info/tree/v7.0.8"
             },
             "funding": [
                 {
@@ -5593,7 +5593,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-23T15:02:46+00:00"
+            "time": "2024-05-31T14:55:39+00:00"
         },
         {
             "name": "symfony/routing",
@@ -6346,16 +6346,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v7.0.4",
+            "version": "v7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "f5832521b998b0bec40bee688ad5de98d4cf111b"
+                "reference": "6f41b185e742737917e6f2e3eca37767fba5f17a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/f5832521b998b0bec40bee688ad5de98d4cf111b",
-                "reference": "f5832521b998b0bec40bee688ad5de98d4cf111b",
+                "url": "https://api.github.com/repos/symfony/string/zipball/6f41b185e742737917e6f2e3eca37767fba5f17a",
+                "reference": "6f41b185e742737917e6f2e3eca37767fba5f17a",
                 "shasum": ""
             },
             "require": {
@@ -6369,6 +6369,7 @@
                 "symfony/translation-contracts": "<2.5"
             },
             "require-dev": {
+                "symfony/emoji": "^7.1",
                 "symfony/error-handler": "^6.4|^7.0",
                 "symfony/http-client": "^6.4|^7.0",
                 "symfony/intl": "^6.4|^7.0",
@@ -6412,7 +6413,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v7.0.4"
+                "source": "https://github.com/symfony/string/tree/v7.1.0"
             },
             "funding": [
                 {
@@ -6428,7 +6429,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-01T13:17:36+00:00"
+            "time": "2024-05-17T10:55:18+00:00"
         },
         {
             "name": "symfony/translation",
